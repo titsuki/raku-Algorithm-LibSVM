@@ -13,8 +13,8 @@ class Build {
 
 	my constant $VERSION = "3.22";
 	if $VERSION.IO.d {
-	    shell "patch $VERSION/svm.h $VERSION/svm.h.patch -o - > svm.h";
-	    shell "patch $VERSION/svm.cpp $VERSION/svm.cpp.patch -o - > svm.cpp";
+	    shell "patch $VERSION/svm.h $VERSION/svm.h.patch -o svm.h";
+	    shell "patch $VERSION/svm.cpp $VERSION/svm.cpp.patch -o svm.cpp";
 	}
 	shell(%vars<MAKE>);
 	chdir($goback);

@@ -21,7 +21,7 @@
   "resources" : [
     "libraries/svm"
   ],
-  "source-url" : "",
+  "source-url" : "git://github.com/titsuki/p6-Algorithm-LibSVM.git",
   "test-depends" : [ ],
   "version" : "*"
 }
