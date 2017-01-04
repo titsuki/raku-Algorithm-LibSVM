@@ -80,6 +80,36 @@ method load-model(Str $filename) returns Algorithm::LibSVM::Model {
     svm_load_model($filename)
 }
 
+method evaluate(@true-values, @predicted-values) {
+    if @true-values.elems != @predicted-values.elems {
+        die 'ERROR: @true-values.elem != @predicted-values.elem';
+    }
+    my ($total-correct, $total-error) = 0, 0;
+    my ($sum-p, $sum-t, $sum-pp, $sum-tt, $sum-pt) = 0, 0, 0, 0, 0;
+    for @true-values Z @predicted-values -> ($t, $p) {
+        $total-correct++ if $p == $t;
+        $total-error += ($p - $t) ** 2;
+        $sum-p += $p;
+        $sum-t += $t;
+        $sum-pp += $p ** 2;
+        $sum-tt += $t ** 2;
+        $sum-pt += $p * $t;
+    }
+
+    my Num $num-t = @true-values.elems.Num;
+    my Num $accuracy = 100.0 * $total-correct / $num-t;
+    my Num $mean-squared-error = $total-error / $num-t;
+
+    my Num $denom =  ($num-t * $sum-pt - $sum-p ** 2) * ($num-t * $sum-pt - $sum-t ** 2);
+    my Num $squared-correlation-coefficient
+    = do if -0e-20 <= $denom <= 0e-20 {
+        Num;
+    } else {
+        ($num-t * $sum-pt - $sum-p * $sum-t) ** 2 / $denom;
+    }
+    { acc => $accuracy, mse =>  $mean-squared-error, scc =>  $squared-correlation-coefficient }
+}
+
 =begin pod
 
 =head1 NAME
