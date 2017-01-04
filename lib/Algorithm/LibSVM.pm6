@@ -102,7 +102,7 @@ method evaluate(@true-values, @predicted-values) {
 
     my Num $denom =  ($num-t * $sum-pt - $sum-p ** 2) * ($num-t * $sum-pt - $sum-t ** 2);
     my Num $squared-correlation-coefficient
-    = do if -0e-20 <= $denom <= 0e-20 {
+    = do if -1e-20 <= $denom <= 1e-20 {
         Num;
     } else {
         ($num-t * $sum-pt - $sum-p * $sum-t) ** 2 / $denom;
