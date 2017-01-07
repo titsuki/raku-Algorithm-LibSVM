@@ -42,8 +42,8 @@ submethod BUILD(SVMType :$svm-type?,
                 Bool :$probability?)
 {
     $!svm_type = $svm-type // C_SVC;
-    $!gamma = $gamma // 0.5e0;
     $!kernel_type = $kernel-type // RBF;
+    $!gamma = $gamma // 0e0;
     $!coef0 = $coef0 // 0e0;
     $!cache_size = $cache-size // 100e0;
     $!eps = $eps // 1e-3;

@@ -42,6 +42,9 @@ method check-probability-model(Algorithm::LibSVM::Model $model) returns Bool {
 }
 
 method train(Algorithm::LibSVM::Problem $problem, Algorithm::LibSVM::Parameter $param) returns Algorithm::LibSVM::Model {
+    if $param.gamma == 0 && $problem.l > 0 {
+        $param.gamma((1.0 / $problem.l).Num);
+    }
     svm_train($problem, $param)
 }
 
