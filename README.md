@@ -27,4 +27,4 @@ Copyright 2016 titsuki
 
 This library is free software; you can redistribute it and/or modify it under the terms of the MIT License.
 
-libsvm ( https://github.com/cjlin1/libsvm ) by Chih-Chung Chang and Chih-Jen Lin is licensed under the MIT.
+libsvm ( https://github.com/cjlin1/libsvm ) by Chih-Chung Chang and Chih-Jen Lin is licensed under the BSD 3-Clause License.
