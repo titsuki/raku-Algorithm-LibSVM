@@ -16,12 +16,14 @@ my sub svm_check_probability_model(Algorithm::LibSVM::Model) returns int32 is na
 
 my sub print_string_stdout(Str) returns Pointer[void] is native($library) { * }
 my sub svm_set_print_string_function(&print_func (Str --> Pointer[void])) is native($library) { * }
+my sub svm_set_srand(int32) is native($library) { * }
 
-submethod BUILD(Bool :$verbose? = False) {
+submethod BUILD(Bool :$verbose? = False, Int :$seed = 1) {
     unless $verbose {
         my $f = sub (Str --> Pointer[void]) { Nil };
         svm_set_print_string_function($f);
     }
+    svm_set_srand($seed);
 }
 
 method cross-validation(Algorithm::LibSVM::Problem $problem, Algorithm::LibSVM::Parameter $param, Int $nr-fold) returns Array {
