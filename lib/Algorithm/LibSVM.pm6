@@ -7,6 +7,8 @@ use NativeHelpers::Array;
 
 unit class Algorithm::LibSVM;
 
+has Int $.num-features;
+
 my constant $library = %?RESOURCES<libraries/svm>.Str;
 
 my sub svm_cross_validation(Algorithm::LibSVM::Problem, Algorithm::LibSVM::Parameter, int32, CArray[num64]) is native($library) { * }
@@ -44,8 +46,8 @@ method check-probability-model(Algorithm::LibSVM::Model $model) returns Bool {
 }
 
 method train(Algorithm::LibSVM::Problem $problem, Algorithm::LibSVM::Parameter $param) returns Algorithm::LibSVM::Model {
-    if $param.gamma == 0 && $problem.l > 0 {
-        $param.gamma((1.0 / $problem.l).Num);
+    if $param.gamma == 0 && $!num-features > 0 {
+        $param.gamma((1.0 / $!num-features).Num);
     }
     svm_train($problem, $param)
 }
@@ -67,9 +69,9 @@ method !_load-problem(\lines) {
         my ($label, $features) = $line.trim.split(/\s+/,2);
         my @feature-list = $features.split(/\s+/);
 
-        my $num-of-x-space = @feature-list.elems;
         my $next = Algorithm::LibSVM::Node.new(index => -1, value => 0e0);
         for @feature-list>>.split(":", :skip-empty).sort({ $^b[0] <=> $^a[0] }) -> ($index, $value) {
+            $!num-features = ($!num-features, $index.Int).max;
             $next = Algorithm::LibSVM::Node.new(index => $index.Int, value => $value.Num, next => $next);
         }
         $prob-y[$y-idx] = $label.Num;
