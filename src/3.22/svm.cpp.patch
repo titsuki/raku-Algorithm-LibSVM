@@ -35,7 +35,7 @@
 //  Copyright(C) 2017 titsuki <titsuki@cpan.org>
 // For more details, see the "LICENSE" file.
 --- libsvm-3.22/svm.cpp	2016-12-22 02:58:58.000000000 +0900
-+++ libsvm-3.22-new/svm.cpp	2017-01-08 22:42:44.664729818 +0900
++++ libsvm-3.22-new/svm.cpp	2017-01-09 20:01:56.486976818 +0900
 @@ -246,7 +246,10 @@
  	}
  	double kernel_precomputed(int i, int j) const
@@ -140,3 +140,12 @@
  			++j;
  		}
  		x_space[j++].index = -1;
+@@ -3179,3 +3186,8 @@
+ 	else
+ 		svm_print_string = print_func;
+ }
++
++void svm_set_srand(int seed)
++{
++	srand(seed);
++}
