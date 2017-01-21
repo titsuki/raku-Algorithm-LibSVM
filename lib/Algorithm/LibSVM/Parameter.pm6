@@ -54,7 +54,7 @@ submethod BUILD(SVMType :$svm-type?,
     $!degree = $degree // 3;
     $!nu = $nu // 0.5e0;
     $!p = $p // 0.1e0;
-    $!shrinking = $shrinking // 0;
+    $!shrinking = $shrinking // 1;
     $!probability = $probability // 0;
 }
 
