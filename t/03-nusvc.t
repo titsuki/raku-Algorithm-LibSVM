@@ -5,28 +5,33 @@ use Algorithm::LibSVM::Parameter;
 use Algorithm::LibSVM::Problem;
 use Algorithm::LibSVM::Model;
 
+sub gen-train {
+    my $max-x = 1;
+    my $min-x = -1;
+    my $max-y = 1;
+    my $min-y = -1;
 
-my @train = (q:to/END/).split("\n", :skip-empty);
-1 1:0.25 2:0.20
-1 1:0.25 2:0.25
-1 1:0.20 2:0.20
-1 1:0.20 2:0.25
-2 1:0.25 2:-0.20
-2 1:0.25 2:-0.25
-2 1:0.20 2:-0.20
-2 1:0.20 2:-0.25
-3 1:-0.25 2:-0.20
-3 1:-0.25 2:-0.25
-3 1:-0.20 2:-0.20
-3 1:-0.20 2:-0.25
-4 1:-0.25 2:0.20
-4 1:-0.25 2:0.25
-4 1:-0.20 2:0.20
-4 1:-0.20 2:0.25
-END
+    do for ^300 {
+        my $x = $min-x + rand * ($max-x - $min-x);
+        my $y = $min-y + rand * ($max-y - $min-y);
 
-my Pair @test = (q:to/END/).split(" ", :skip-empty)>>.split(":").map: { .[0].Int => .[1].Num };
-1:0.22 2:0.22
+        my $label = do given $x, $y {
+            when ($x - 0.5) ** 2 + ($y - 0.5) ** 2 <= 0.2 {
+                1
+            }
+            when ($x - -0.5) ** 2 + ($y - -0.5) ** 2 <= 0.2 {
+                2
+            }
+            default { Nil }
+        }
+        ($label,"1:$x","2:$y") if $label.defined;
+    }.sort({ $^a.[0] cmp $^b.[0] })>>.join(" ")
+}
+
+my Str @train = gen-train;
+
+my Pair @test = (q:to/END/).split(" ", 2)[1].split(" ")>>.split(":").map: { .[0].Int => .[1].Num };
+1 1:0.5 2:0.5
 END
 
 {
@@ -74,7 +79,7 @@ END
 }
 
 {
-    my @tmp = @train>>.split(" ", :skip-empty);
+    my @tmp = @train>>.split(" ");
     my Str @train-matrix = gather for @tmp.pairs -> (:key($index-f), :value(@x)) {
         my $f1 = @x[1].split(":")[0] => @x[1].split(":")[1];
         my $f2 = @x[2].split(":")[0] => @x[2].split(":")[1];
