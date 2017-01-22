@@ -1,17 +1,26 @@
 use v6;
 use NativeCall;
 use Algorithm::LibSVM::Node;
+use NativeHelpers::Array;
 
 unit class Algorithm::LibSVM::Problem is export is repr('CStruct');
 
 has int32 $.l;
-has CArray[num64] $.y;
-has CArray[Algorithm::LibSVM::Node] $.x;
+has CArray[num64] $!y;
+has CArray[Algorithm::LibSVM::Node] $!x;
 
 method BUILD(int32 :$l, CArray[num64] :$y, CArray[Algorithm::LibSVM::Node] :$x) {
     $!l = $l;
     $!y := $y;
     $!x := $x;
+}
+
+method y returns Array {
+    copy-to-array($!y, $!l);
+}
+
+method x returns Array {
+    copy-to-array($!x, $!l);
 }
 
 =begin pod
