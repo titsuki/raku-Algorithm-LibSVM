@@ -41,7 +41,6 @@ END
     my Algorithm::LibSVM::Problem $problem = $libsvm.load-problem(@train);
     ok $libsvm.check-parameter($problem, $parameter), "NU_SVC/LINEAR";
     my $model = $libsvm.train($problem, $parameter);
-    nok $libsvm.check-probability-model($model);
     is $model.predict(features => @test)<label>, 1.0e0;
 }
 
@@ -52,7 +51,6 @@ END
     my Algorithm::LibSVM::Problem $problem = $libsvm.load-problem(@train);
     ok $libsvm.check-parameter($problem, $parameter), "NU_SVC/POLY";
     my $model = $libsvm.train($problem, $parameter);
-    nok $libsvm.check-probability-model($model);
     is $model.predict(features => @test)<label>, 1.0e0;
 }
 
@@ -63,7 +61,6 @@ END
     my Algorithm::LibSVM::Problem $problem = $libsvm.load-problem(@train);
     ok $libsvm.check-parameter($problem, $parameter), "NU_SVC/RBF";
     my $model = $libsvm.train($problem, $parameter);
-    nok $libsvm.check-probability-model($model);
     is $model.predict(features => @test)<label>, 1.0e0;
 }
 
@@ -74,7 +71,6 @@ END
     my Algorithm::LibSVM::Problem $problem = $libsvm.load-problem(@train);
     ok $libsvm.check-parameter($problem, $parameter), "NU_SVC/SIGMOID";
     my $model = $libsvm.train($problem, $parameter);
-    nok $libsvm.check-probability-model($model);
     is $model.predict(features => @test)<label>, 1.0e0;
 }
 
@@ -104,7 +100,6 @@ END
     my Algorithm::LibSVM::Problem $problem = $libsvm.load-problem(@train-matrix);
     ok $libsvm.check-parameter($problem, $parameter), "NU_SVC/PRECOMPUTED";
     my $model = $libsvm.train($problem, $parameter);
-    nok $libsvm.check-probability-model($model);
     is $model.predict(features => @test-matrix)<label>, 1.0e0;
 }
 

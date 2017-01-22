@@ -41,7 +41,6 @@ END
     my Algorithm::LibSVM::Problem $problem = $libsvm.load-problem(@train);
     ok $libsvm.check-parameter($problem, $parameter), "ONE_CLASS/RBF";
     my $model = $libsvm.train($problem, $parameter);
-    nok $libsvm.check-probability-model($model);
     is $model.predict(features => @test-in)<label>, 1.0e0;
     is $model.predict(features => @test-out)<label>, -1.0e0;
 }

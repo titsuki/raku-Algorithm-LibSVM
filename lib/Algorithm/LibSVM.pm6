@@ -14,8 +14,6 @@ my constant $library = %?RESOURCES<libraries/svm>.Str;
 my sub svm_cross_validation(Algorithm::LibSVM::Problem, Algorithm::LibSVM::Parameter, int32, CArray[num64]) is native($library) { * }
 my sub svm_train(Algorithm::LibSVM::Problem, Algorithm::LibSVM::Parameter) returns Algorithm::LibSVM::Model is native($library) { * }
 my sub svm_check_parameter(Algorithm::LibSVM::Problem, Algorithm::LibSVM::Parameter) returns Str is native($library) { * }
-my sub svm_check_probability_model(Algorithm::LibSVM::Model) returns int32 is native($library) { * }
-
 my sub print_string_stdout(Str) returns Pointer[void] is native($library) { * }
 my sub svm_set_print_string_function(&print_func (Str --> Pointer[void])) is native($library) { * }
 my sub svm_set_srand(int32) is native($library) { * }
@@ -37,19 +35,15 @@ method cross-validation(Algorithm::LibSVM::Problem $problem, Algorithm::LibSVM::
 
 method check-parameter(Algorithm::LibSVM::Problem $problem, Algorithm::LibSVM::Parameter $param) returns Bool {
     my $msg = svm_check_parameter($problem, $param);
-    return False if $msg.defined;
+    die "$msg" if $msg.defined;
     True
-}
-
-method check-probability-model(Algorithm::LibSVM::Model $model) returns Bool {
-    Bool(svm_check_probability_model($model))
 }
 
 method train(Algorithm::LibSVM::Problem $problem, Algorithm::LibSVM::Parameter $param) returns Algorithm::LibSVM::Model {
     if $param.gamma == 0 && $!num-features > 0 {
         $param.gamma((1.0 / $!num-features).Num);
     }
-    svm_train($problem, $param)
+    svm_train($problem, $param) if self.check-parameter($problem, $param);
 }
 
 multi method load-problem(\lines) returns Algorithm::LibSVM::Problem {
