@@ -10,6 +10,14 @@ SYNOPSIS
 
     use Algorithm::LibSVM;
 
+    my $libsvm = Algorithm::LibSVM.new;
+    my Algorithm::LibSVM::Parameter $parameter .= new(svm-type => C_SVC,
+                                                      kernel-type => LINEAR);
+    my Algorithm::LibSVM::Problem $problem = $libsvm.load-problem(@train);
+    $libsvm.check-parameter($problem, $parameter);
+    my $model = $libsvm.train($problem, $parameter);
+    say $model.predict(features => @test)<label> # 1
+
 DESCRIPTION
 ===========
 
