@@ -19,6 +19,7 @@ my sub svm_predict(Algorithm::LibSVM::Model, Algorithm::LibSVM::Node) returns nu
 my sub svm_predict_probability(Algorithm::LibSVM::Model, Algorithm::LibSVM::Node, CArray[num64]) returns num64 is native($library) { * }
 my sub svm_free_model_content(Algorithm::LibSVM::Model) is native($library) { * }
 my sub svm_free_and_destroy_model(Algorithm::LibSVM::Model) is native($library) { * }
+my sub svm_check_probability_model(Algorithm::LibSVM::Model) returns int32 is native($library) { * }
 
 sub svm_save_model(Str, Algorithm::LibSVM::Model) is native($library) is export { * }
 
@@ -66,7 +67,7 @@ method !make-node-linked-list(Pair :@features) returns Algorithm::LibSVM::Node {
 
 method predict(Pair :@features, Bool :$probability, Bool :$decision-values) {
     my %result;
-    if $probability {
+    if $probability and self.check-probability-model {
         my $prob-estimates = CArray[num64].new;
         $prob-estimates[self.nr-class] = 0e0;
         my $label = svm_predict_probability(self, self!make-node-linked-list(:@features), $prob-estimates);
@@ -87,6 +88,14 @@ method predict(Pair :@features, Bool :$probability, Bool :$decision-values) {
         %result<label> = svm_predict(self, self!make-node-linked-list(:@features));
     }
     %result;
+}
+
+method check-probability-model returns Bool {
+    my $ok = Bool(svm_check_probability_model(self));
+    if not $ok {
+        die "ERROR: TBD";
+    }
+    $ok;
 }
 
 submethod DESTROY {

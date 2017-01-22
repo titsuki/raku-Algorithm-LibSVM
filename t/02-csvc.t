@@ -41,7 +41,6 @@ END
     my Algorithm::LibSVM::Problem $problem = $libsvm.load-problem(@train);
     ok $libsvm.check-parameter($problem, $parameter), "C_SVC/LINEAR";
     my $model = $libsvm.train($problem, $parameter);
-    nok $libsvm.check-probability-model($model);
     is $model.predict(features => @test)<label>, 1.0e0;
 }
 
@@ -53,7 +52,6 @@ END
     my Algorithm::LibSVM::Problem $problem = $libsvm.load-problem(@train);
     ok $libsvm.check-parameter($problem, $parameter), "C_SVC/LINEAR";
     my $model = $libsvm.train($problem, $parameter);
-    ok $libsvm.check-probability-model($model);
     is $model.predict(features => @test, :probability)<label>, 1;
     ok $model.predict(features => @test, :probability)<prob-estimates>[0] > 0.25e0;
 }
@@ -65,7 +63,6 @@ END
     my Algorithm::LibSVM::Problem $problem = $libsvm.load-problem(@train);
     ok $libsvm.check-parameter($problem, $parameter), "C_SVC/POLY";
     my $model = $libsvm.train($problem, $parameter);
-    nok $libsvm.check-probability-model($model);
     is $model.predict(features => @test)<label>, 1.0e0;
 }
 
@@ -77,7 +74,6 @@ END
     my Algorithm::LibSVM::Problem $problem = $libsvm.load-problem(@train);
     ok $libsvm.check-parameter($problem, $parameter), "C_SVC/POLY";
     my $model = $libsvm.train($problem, $parameter);
-    ok $libsvm.check-probability-model($model);
     is $model.predict(features => @test, :probability)<label>, 1;
     ok $model.predict(features => @test, :probability)<prob-estimates>[0] > 0.25e0;
 }
@@ -89,7 +85,6 @@ END
     my Algorithm::LibSVM::Problem $problem = $libsvm.load-problem(@train);
     ok $libsvm.check-parameter($problem, $parameter), "C_SVC/RBF";
     my $model = $libsvm.train($problem, $parameter);
-    nok $libsvm.check-probability-model($model);
     is $model.predict(features => @test)<label>, 1.0e0;
 }
 
@@ -101,7 +96,6 @@ END
     my Algorithm::LibSVM::Problem $problem = $libsvm.load-problem(@train);
     ok $libsvm.check-parameter($problem, $parameter), "C_SVC/RBF";
     my $model = $libsvm.train($problem, $parameter);
-    ok $libsvm.check-probability-model($model);
     is $model.predict(features => @test, :probability)<label>, 1;
     ok $model.predict(features => @test, :probability)<prob-estimates>[0] > 0.25e0;
 }
@@ -114,7 +108,6 @@ END
     my Algorithm::LibSVM::Problem $problem = $libsvm.load-problem(@train);
     ok $libsvm.check-parameter($problem, $parameter), "C_SVC/SIGMOID";
     my $model = $libsvm.train($problem, $parameter);
-    nok $libsvm.check-probability-model($model);
     is $model.predict(features => @test)<label>, 1.0e0;
 }
 
@@ -126,7 +119,6 @@ END
     my Algorithm::LibSVM::Problem $problem = $libsvm.load-problem(@train);
     ok $libsvm.check-parameter($problem, $parameter), "C_SVC/SIGMOID";
     my $model = $libsvm.train($problem, $parameter);
-    ok $libsvm.check-probability-model($model);
     is $model.predict(features => @test, :probability)<label>, 1;
     ok $model.predict(features => @test, :probability)<prob-estimates>[0] > 0.25e0;
 }
@@ -154,7 +146,6 @@ END
     my Algorithm::LibSVM::Problem $problem = $libsvm.load-problem(@train-matrix);
     ok $libsvm.check-parameter($problem, $parameter), "C_SVC/PRECOMPUTED";
     my $model = $libsvm.train($problem, $parameter);
-    nok $libsvm.check-probability-model($model);
     my Pair @test-matrix = @train-matrix.[0]\
     .split(" ", 2)[1].split(" ")>>.split(":").map: { .[0].Int => .[1].Num };
     is $model.predict(features => @test-matrix.item)<label>, 1.0e0;
