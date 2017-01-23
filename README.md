@@ -87,7 +87,7 @@ Conducts `$nr-fold`-fold cross validation and returns predicted values.
 
 Defined as:
 
-method train(Algorithm::LibSVM::Problem $problem, Algorithm::LibSVM::Parameter $param) returns Algorithm::LibSVM::Model
+    method train(Algorithm::LibSVM::Problem $problem, Algorithm::LibSVM::Parameter $param) returns Algorithm::LibSVM::Model
 
 Trains a SVM model.
 
@@ -99,7 +99,8 @@ Trains a SVM model.
 
 Defined as:
 
-multi method load-problem(\lines) returns Algorithm::LibSVM::Problem multi method load-problem(Str $filename) returns Algorithm::LibSVM::Problem
+    multi method load-problem(\lines) returns Algorithm::LibSVM::Problem
+    multi method load-problem(Str $filename) returns Algorithm::LibSVM::Problem
 
 Loads libsvm-format data.
 
@@ -107,7 +108,7 @@ Loads libsvm-format data.
 
 Defined as:
 
-method load-model(Str $filename) returns Algorithm::LibSVM::Model
+    method load-model(Str $filename) returns Algorithm::LibSVM::Model
 
 Loads libsvm model.
 
@@ -115,7 +116,7 @@ Loads libsvm model.
 
 Defined as:
 
-method evaluate(@true-values, @predicted-values) returns Hash
+    method evaluate(@true-values, @predicted-values) returns Hash
 
 Evaluates the performance of the three metrics (i.e. accuracy, mean squared error and squared correlation coefficient)
 
