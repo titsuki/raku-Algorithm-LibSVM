@@ -81,7 +81,7 @@ method load-model(Str $filename) returns Algorithm::LibSVM::Model {
     svm_load_model($filename)
 }
 
-method evaluate(@true-values, @predicted-values) {
+method evaluate(@true-values, @predicted-values) returns Hash {
     if @true-values.elems != @predicted-values.elems {
         die 'ERROR: @true-values.elem != @predicted-values.elem';
     }
