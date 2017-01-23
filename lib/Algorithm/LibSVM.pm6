@@ -180,6 +180,57 @@ Algorithm::LibSVM - A Perl 6 bindings for libsvm
 
 Algorithm::LibSVM is a Perl 6 bindings for libsvm.
 
+=head2 METHODS
+
+=head3 cross-validation
+
+Defined as:
+
+       method cross-validation(Algorithm::LibSVM::Problem $problem, Algorithm::LibSVM::Parameter $param, Int $nr-fold) returns Array
+
+Conducts C<$nr-fold>-fold cross validation and returns predicted values.
+
+=head3 train
+
+Defined as:
+
+method train(Algorithm::LibSVM::Problem $problem, Algorithm::LibSVM::Parameter $param) returns Algorithm::LibSVM::Model
+
+Trains a SVM model.
+
+=item C<$problem> The instance of Algorithm::LibSVM::Problem.
+
+=item C<$param> The instance of Algorithm::LibSVM::Parameter.
+
+=head3 load-problem
+
+Defined as:
+
+multi method load-problem(\lines) returns Algorithm::LibSVM::Problem
+multi method load-problem(Str $filename) returns Algorithm::LibSVM::Problem
+
+Loads libsvm-format data.
+
+=head3 load-model
+
+Defined as:
+
+method load-model(Str $filename) returns Algorithm::LibSVM::Model
+
+Loads libsvm model.
+
+=head3 evaluate
+
+Defined as:
+
+method evaluate(@true-values, @predicted-values) returns Hash
+
+Evaluates the performance of the three metrics (i.e. accuracy, mean squared error and squared correlation coefficient)
+
+=item C<@true-values> The array that contains ground-truth values.
+
+=item C<@predicted-values> The array that contains predicted values.
+
 =head1 AUTHOR
 
 titsuki <titsuki@cpan.org>

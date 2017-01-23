@@ -72,6 +72,57 @@ DESCRIPTION
 
 Algorithm::LibSVM is a Perl 6 bindings for libsvm.
 
+METHODS
+-------
+
+### cross-validation
+
+Defined as:
+
+    method cross-validation(Algorithm::LibSVM::Problem $problem, Algorithm::LibSVM::Parameter $param, Int $nr-fold) returns Array
+
+Conducts `$nr-fold`-fold cross validation and returns predicted values.
+
+### train
+
+Defined as:
+
+method train(Algorithm::LibSVM::Problem $problem, Algorithm::LibSVM::Parameter $param) returns Algorithm::LibSVM::Model
+
+Trains a SVM model.
+
+  * `$problem` The instance of Algorithm::LibSVM::Problem.
+
+  * `$param` The instance of Algorithm::LibSVM::Parameter.
+
+### load-problem
+
+Defined as:
+
+multi method load-problem(\lines) returns Algorithm::LibSVM::Problem multi method load-problem(Str $filename) returns Algorithm::LibSVM::Problem
+
+Loads libsvm-format data.
+
+### load-model
+
+Defined as:
+
+method load-model(Str $filename) returns Algorithm::LibSVM::Model
+
+Loads libsvm model.
+
+### evaluate
+
+Defined as:
+
+method evaluate(@true-values, @predicted-values) returns Hash
+
+Evaluates the performance of the three metrics (i.e. accuracy, mean squared error and squared correlation coefficient)
+
+  * `@true-values` The array that contains ground-truth values.
+
+  * `@predicted-values` The array that contains predicted values.
+
 AUTHOR
 ======
 
