@@ -192,6 +192,141 @@ Algorithm::LibSVM::Parameter - A Perl 6 Algorithm::LibSVM::Parameter class
 
 Algorithm::LibSVM::Parameter is a Perl 6 Algorithm::LibSVM::Parameter class
 
+=head2 METHODS
+
+=head3 svm-type
+
+Defined as:
+
+        multi method svm-type
+        multi method svm-type(SVMType $svm-type)
+
+Are getter/setter methods for the parameter svm-type.
+
+=head3 kernel-type
+
+Defined as:
+
+        multi method kernel-type
+        multi method kernel-type(KernelType $kernel-type)
+
+Are getter/setter methods for the parameter kernel-type.
+
+=head3 degree
+
+Defined as:
+
+        multi method degree
+        multi method degree(Int:D $degree)
+
+Are getter/setter methods for the parameter degree.
+
+=head3 gamma
+
+Defined as:
+
+        multi method gamma
+        multi method gamma(Num:D $gamma)
+
+Are getter/setter methods for the parameter gamma.
+
+=head3 coef0
+
+Defined as:
+
+       multi method coef0
+       multi method coef0(Num:D $coef0)
+
+Are getter/setter methods for the parameter coef0.
+
+=head3 cache-size
+
+Defined as:
+
+       multi method cache-size
+       multi method cache-size(Num:D $cache-size)
+
+Are getter/setter methods for the parameter cache-size.
+
+=head3 eps
+
+Defined as:
+
+       multi method eps
+       multi method eps(Num:D $eps)
+
+Are getter/setter methods for the parameter eps.
+
+=head3 C
+
+Defined as:
+
+       multi method C
+       multi method C(Num:D $C)
+
+Are getter/setter methods for the parameter C.
+
+=head3 nr-weight
+
+Defined as:
+
+       multi method nr-weight
+       multi method nr-weight(Int:D $nr-weight)
+
+Are getter/setter methods for the parameter nr-weight.
+
+=head3 weight-label
+
+Defined as:
+
+       method weight-label
+
+is a getter method for the parameter weight-label.
+
+=head3 weight
+
+Defined as:
+
+       method weight
+
+is a getter method for the parameter weight.
+
+=head3 nu
+
+Defined as:
+
+        multi method nu
+        multi method nu(Num:D $nu)
+
+Are getter/setter methods for the parameter nu.
+
+=head3 p
+
+Defined as:
+
+       multi method p
+       multi method p(Num:D $p)
+
+Are getter/setter methods for the parameter p.
+
+=head3 shrinking
+
+Defined as:
+
+       multi method shrinking returns Bool
+       multi method shrinking(Bool:D $shrinking)
+
+Are getter/setter methods for the parameter shrinking.
+
+=head3 probability
+
+Defined as:
+
+        multi method probability returns Bool
+        multi method probability(Bool:D $probability)
+
+Are getter/setter methods for the parameter probability.
+
 =head1 AUTHOR
 
 titsuki <titsuki@cpan.org>
