@@ -65,7 +65,7 @@ method !make-node-linked-list(Pair :@features) returns Algorithm::LibSVM::Node {
     $next;
 }
 
-method predict(Pair :@features, Bool :$probability, Bool :$decision-values) {
+method predict(Pair :@features, Bool :$probability, Bool :$decision-values) returns Hash {
     my %result;
     if $probability and self.check-probability-model {
         my $prob-estimates = CArray[num64].new;
