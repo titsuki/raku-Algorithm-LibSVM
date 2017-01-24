@@ -37,6 +37,32 @@ Algorithm::LibSVM::Problem - A Perl 6 Algorithm::LibSVM::Problem class
 
 Algorithm::LibSVM::Problem is a Perl 6 Algorithm::LibSVM::Problem class
 
+=head2 METHODS
+
+=head3 l
+
+Defined as:
+
+        method l returns Int:D
+
+Returns the number of the training data.
+
+=head3 y
+
+Defined as:
+
+        method y returns Array
+
+Returns the array containing the target values (C<Int> values in classification, C<Num> values in regression) of the training data.
+
+=head3 x
+
+Defined as:
+
+        method x returns Array
+
+Returns the array of pointers, each of which points to a sparse representation (i.e. array of C<Algorithm::LibSVM::Node>) of one training vector.
+
 =head1 AUTHOR
 
 titsuki <titsuki@cpan.org>
