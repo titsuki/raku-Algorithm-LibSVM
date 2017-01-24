@@ -7,7 +7,7 @@ use NativeHelpers::Array;
 
 unit class Algorithm::LibSVM;
 
-has Int $.num-features;
+has Int $.nr-feature;
 
 my constant $library = %?RESOURCES<libraries/svm>.Str;
 
@@ -40,8 +40,8 @@ method check-parameter(Algorithm::LibSVM::Problem $problem, Algorithm::LibSVM::P
 }
 
 method train(Algorithm::LibSVM::Problem $problem, Algorithm::LibSVM::Parameter $param) returns Algorithm::LibSVM::Model {
-    if $param.gamma == 0 && $!num-features > 0 {
-        $param.gamma((1.0 / $!num-features).Num);
+    if $param.gamma == 0 && $!nr-feature > 0 {
+        $param.gamma((1.0 / $!nr-feature).Num);
     }
     svm_train($problem, $param) if self.check-parameter($problem, $param);
 }
@@ -65,7 +65,7 @@ method !_load-problem(\lines) {
 
         my $next = Algorithm::LibSVM::Node.new(index => -1, value => 0e0);
         for @feature-list>>.split(":", :skip-empty).sort({ $^b[0] <=> $^a[0] }) -> ($index, $value) {
-            $!num-features = ($!num-features, $index.Int).max;
+            $!nr-feature = ($!nr-feature, $index.Int).max;
             $next = Algorithm::LibSVM::Node.new(index => $index.Int, value => $value.Num, next => $next);
         }
         $prob-y[$y-idx] = $label.Num;
