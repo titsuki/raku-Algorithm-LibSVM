@@ -231,6 +231,14 @@ Evaluates the performance of the three metrics (i.e. accuracy, mean squared erro
 
 =item C<@predicted-values> The array that contains predicted values.
 
+=head3 nr-feature
+
+Defined as:
+
+        method nr-feature returns Int:D
+
+Returns the number of the features.
+
 =head1 AUTHOR
 
 titsuki <titsuki@cpan.org>
