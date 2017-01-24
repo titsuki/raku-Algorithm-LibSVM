@@ -116,6 +116,72 @@ Algorithm::LibSVM::Model - A Perl 6 Algorithm::LibSVM::Model class
 
 Algorithm::LibSVM::Model is a Perl 6 Algorithm::LibSVM::Model class
 
+=head2 METHODS
+
+=head3 save
+
+Defined as:
+
+        method save(Str $filename)
+
+Saves the model to the file C<$filename>.
+
+=head3 svm-type
+
+Defined as:
+
+        method svm-type returns SVMType
+
+Returns the C<SVMType> object.
+
+=head3 nr-class
+
+Defined as:
+
+        method nr-class returns Int:D
+
+Returns the number of the classes.
+
+=head3 labels
+
+Defined as:
+
+        method labels returns Array
+
+Returns the labeles.
+
+=head3 sv-indices
+
+Defined as:
+
+        method sv-indices returns Array
+
+Returns the indices of the support vectors.
+
+=head3 nr-sv
+
+Defined as:
+
+        method nr-sv returns Int:D
+
+Returns the number of the support vectors.
+
+=head3 svr-probability
+
+Defined as:
+
+        method svr-probability returns Num:D
+
+Returns the probability predicted by support vector regression.
+
+=head3 predict
+
+Defined as:
+
+        method predict(Pair :@features, Bool :$probability, Bool :$decision-values) returns Hash
+
+Conducts the prediction and returns its results.
+
 =head1 AUTHOR
 
 titsuki <titsuki@cpan.org>
