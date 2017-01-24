@@ -148,7 +148,7 @@ Defined as:
 
         method labels returns Array
 
-Returns the labeles.
+Returns the labels.
 
 =head3 sv-indices
 
