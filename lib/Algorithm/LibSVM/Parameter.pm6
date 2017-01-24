@@ -132,11 +132,11 @@ multi method nr-weight {
 
 # TODO: setter for weight-label, weight
 
-multi method weight-label {
+method weight-label {
     copy-to-array($!weight_label, $!nr_weight);
 }
 
-multi method weight {
+method weight {
     copy-to-array($!weight, $!nr_weight);
 }
 
