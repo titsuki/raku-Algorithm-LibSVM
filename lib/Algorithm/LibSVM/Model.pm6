@@ -53,7 +53,7 @@ method nr-sv returns Int:D {
     svm_get_nr_sv(self)
 }
 
-method svr-probability returns num64 {
+method svr-probability returns Num:D {
     svm_get_svr_probability(self)
 }
 
