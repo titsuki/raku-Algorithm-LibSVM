@@ -24,6 +24,20 @@ Algorithm::LibSVM::Node - A Perl 6 Algorithm::LibSVM::Node class
 
 Algorithm::LibSVM::Node is a Perl 6 Algorithm::LibSVM::Node class
 
+=head2 METHODS
+
+=head3 index
+
+Defined as:
+
+        method index returns Int:D
+
+=head3 value
+
+Defined as:
+
+        method value returns Num:D
+
 =head1 AUTHOR
 
 titsuki <titsuki@cpan.org>
