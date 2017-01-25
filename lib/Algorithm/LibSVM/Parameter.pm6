@@ -327,6 +327,32 @@ Defined as:
 
 Are getter/setter methods for the parameter probability.
 
+=head2 CONSTANTS
+
+=head3 SVMType
+
+=item C<C_SVC>
+
+=item C<NU_SVC>
+
+=item C<ONE_CLASS>
+
+=item C<EPSILON_SVR>
+
+=item C<NU_SVR>
+
+=head3 KernelType
+
+=item C<LINEAR>
+
+=item C<POLY>
+
+=item C<RBF>
+
+=item C<SIGMOID>
+
+=item C<PRECOMPUTED>
+
 =head1 AUTHOR
 
 titsuki <titsuki@cpan.org>
