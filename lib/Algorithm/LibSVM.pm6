@@ -171,7 +171,7 @@ Algorithm::LibSVM - A Perl 6 bindings for libsvm
 
   my Str @train = gen-train;
 
-  my Pair @test = (q:to/END/).split(" ", 2)[1].split(" ")>>.split(":").map: { .[0].Int => .[1].Num };
+  my Pair @test = parse-libsvmformat(q:to/END/).head<pairs>.flat;
   1 1:0.5 2:0.5
   END
 
@@ -244,6 +244,16 @@ Defined as:
         method nr-feature returns Int:D
 
 Returns the number of the features.
+
+=head2 ROUTINES
+
+=head3 parse-libsvmformat
+
+Defined as:
+
+        sub parse-libsvmformat(Str $text) returns Array is export
+
+Is a helper routine for handling libsvm format.
 
 =head1 AUTHOR
 
