@@ -143,6 +143,23 @@ Defined as:
 
 Is a helper routine for handling libsvm format.
 
+CAUTION
+=======
+
+DON'T USE `PRECOMPUTED` KERNEL
+------------------------------
+
+As a temporary expedient for [RT130187](https://rt.perl.org/Public/Bug/Display.html?id=130187), I applied the patch programs (e.g. [src/3.22/svm.cpp.patch](src/3.22/svm.cpp.patch)) for the sake of disabling random access of the problematic array.
+
+Sadly to say, those patches drastically increase the complexity of using `PRECOMPUTED` kernel.
+
+SEE ALSO
+========
+
+  * libsvm [https://github.com/cjlin1/libsvm](https://github.com/cjlin1/libsvm)
+
+  * RT130187 [https://rt.perl.org/Public/Bug/Display.html?id=130187](https://rt.perl.org/Public/Bug/Display.html?id=130187)
+
 AUTHOR
 ======
 

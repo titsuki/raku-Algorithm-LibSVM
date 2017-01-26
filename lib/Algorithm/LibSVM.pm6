@@ -255,6 +255,20 @@ Defined as:
 
 Is a helper routine for handling libsvm format.
 
+=head1 CAUTION
+
+=head2 DON'T USE C<PRECOMPUTED> KERNEL
+
+As a temporary expedient for L<RT130187|https://rt.perl.org/Public/Bug/Display.html?id=130187>, I applied the patch programs (e.g. L<src/3.22/svm.cpp.patch>) for the sake of disabling random access of the problematic array.
+
+Sadly to say, those patches drastically increase the complexity of using C<PRECOMPUTED> kernel.
+
+=head1 SEE ALSO
+
+=item libsvm L<https://github.com/cjlin1/libsvm>
+
+=item RT130187 L<https://rt.perl.org/Public/Bug/Display.html?id=130187>
+
 =head1 AUTHOR
 
 titsuki <titsuki@cpan.org>
