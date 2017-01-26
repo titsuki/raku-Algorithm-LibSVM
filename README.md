@@ -130,7 +130,7 @@ Defined as:
 
     method nr-feature returns Int:D
 
-Returns the number of the features.
+Returns the maximum index of all the features.
 
 ROUTINES
 --------
