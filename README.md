@@ -141,7 +141,7 @@ Defined as:
 
     sub parse-libsvmformat(Str $text) returns Array is export
 
-Is a helper routine for handling libsvm format.
+Is a helper routine for handling libsvm-format text.
 
 CAUTION
 =======
