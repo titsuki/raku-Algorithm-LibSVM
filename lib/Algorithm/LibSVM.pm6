@@ -3,6 +3,8 @@ use NativeCall;
 use Algorithm::LibSVM::Problem;
 use Algorithm::LibSVM::Parameter;
 use Algorithm::LibSVM::Model;
+use Algorithm::LibSVM::Grammar;
+use Algorithm::LibSVM::Actions;
 use NativeHelpers::Array;
 
 unit class Algorithm::LibSVM;
@@ -109,6 +111,10 @@ method evaluate(@true-values, @predicted-values) returns Hash {
         ($num-t * $sum-pt - $sum-p * $sum-t) ** 2 / $denom;
     }
     { acc => $accuracy, mse =>  $mean-squared-error, scc =>  $squared-correlation-coefficient }
+}
+
+sub parse-libsvmformat(Str $text) returns Array is export {
+    Algorithm::LibSVM::Grammar.parse($text, actions => Algorithm::LibSVM::Actions).made
 }
 
 =begin pod

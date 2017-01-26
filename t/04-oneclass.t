@@ -25,11 +25,11 @@ sub gen-train {
 }
 my @train = gen-train;
 
-my Pair @test-in = (q:to:c/END/).split(" ", 2)[1].split(" ")>>.split(":").map: { .[0].Int => .[1].Num };
+my Pair @test-in = parse-libsvmformat(q:to:c/END/).head<pairs>.flat;
 1 1:{sqrt(0)} 2:{sqrt(0)}
 END
 
-my Pair @test-out = (q:to:c/END/).split(" ", 2)[1].split(" ")>>.split(":").map: { .[0].Int => .[1].Num };
+my Pair @test-out = parse-libsvmformat(q:to:c/END/).head<pairs>.flat;
 1 1:{sqrt(10)} 2:{sqrt(10)}
 END
 

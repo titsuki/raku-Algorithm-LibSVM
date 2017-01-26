@@ -57,7 +57,7 @@ method svr-probability returns Num:D {
     svm_get_svr_probability(self)
 }
 
-method !make-node-linked-list(Pair :@features) returns Algorithm::LibSVM::Node {
+method !make-node-linked-list(:@features) returns Algorithm::LibSVM::Node {
     my Algorithm::LibSVM::Node $next .= new(index => -1, value => 0e0);
     for @features.sort({ $^b.key <=> $^a.key }) {
         $next = Algorithm::LibSVM::Node.new(index => .key, value => .value, next => $next);
@@ -65,7 +65,7 @@ method !make-node-linked-list(Pair :@features) returns Algorithm::LibSVM::Node {
     $next;
 }
 
-method predict(Pair :@features, Bool :$probability, Bool :$decision-values) returns Hash {
+method predict(:@features where Positional[Pair]|Array[Pair], Bool :$probability, Bool :$decision-values) returns Hash {
     my %result;
     if $probability and self.check-probability-model {
         my $prob-estimates = CArray[num64].new;

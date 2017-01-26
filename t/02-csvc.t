@@ -30,7 +30,7 @@ sub gen-train {
 
 my Str @train = gen-train;
 
-my Pair @test = (q:to/END/).split(" ", 2)[1].split(" ")>>.split(":").map: { .[0].Int => .[1].Num };
+my Pair @test = parse-libsvmformat(q:to/END/).head<pairs>.flat;
 1 1:0.5 2:0.5
 END
 
