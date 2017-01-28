@@ -8,14 +8,17 @@ use Algorithm::LibSVM::Model;
 {
     my $libsvm = Algorithm::LibSVM.new;
     my Algorithm::LibSVM::Parameter $parameter .= new(svm-type => NU_SVR,
-                                                      kernel-type => LINEAR);
+                                                      kernel-type => LINEAR,
+                                                      :probability);
     my @train = (1..100).map: { ((2.0 * $_),"1:$_").join(" ") };
     my Algorithm::LibSVM::Problem $problem = $libsvm.load-problem(@train);
     my $model = $libsvm.train($problem, $parameter);
     my Pair @test = parse-libsvmformat(@train.pick).head<pairs>.flat;
     my $actual = $model.predict(features => @test)<label>;
     my $expected = 2.0 * @test[0].value;
-    ok $expected - 0.1e0 <= $actual <= $expected + 0.1e0;
+    my $mae = $model.svr-probability;
+    my $std = sqrt(2.0 * $mae * $mae);
+    ok $expected - 5.0 * $std <= $actual <= $expected + 5.0 * $std;
 }
 
 done-testing;
