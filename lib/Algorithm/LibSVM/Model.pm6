@@ -93,7 +93,7 @@ method predict(:@features where Positional[Pair]|Array[Pair], Bool :$probability
 method check-probability-model returns Bool {
     my $ok = Bool(svm_check_probability_model(self));
     if not $ok {
-        die "ERROR: TBD";
+        die "ERROR: Given model cannot compute probability.";
     }
     $ok;
 }
