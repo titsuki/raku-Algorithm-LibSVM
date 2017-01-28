@@ -39,9 +39,9 @@ END
     my Algorithm::LibSVM::Parameter $parameter .= new(svm-type => NU_SVC,
                                                       kernel-type => LINEAR);
     my Algorithm::LibSVM::Problem $problem = $libsvm.load-problem(@train);
-    ok $libsvm.check-parameter($problem, $parameter), "NU_SVC/LINEAR";
+    ok $libsvm.check-parameter($problem, $parameter), { "Given a setting of " ~ $_ ~ ", Algorithm::LibSVM.check-parameter should return True" }("NU_SVC/LINEAR");
     my $model = $libsvm.train($problem, $parameter);
-    is $model.predict(features => @test)<label>, 1.0e0;
+    is $model.predict(features => @test)<label>, 1.0e0, { "Given a setting of " ~ $_ ~ ", When Algorithm::LibSVM::Model.predict<label> predicts a label of a instance (where the instance is at the center of the cluster labeled as 1 in the training set), it should return 1.0e0" }("NU_SVC/LINEAR");
 }
 
 {
@@ -49,9 +49,9 @@ END
     my Algorithm::LibSVM::Parameter $parameter .= new(svm-type => NU_SVC,
                                                       kernel-type => POLY);
     my Algorithm::LibSVM::Problem $problem = $libsvm.load-problem(@train);
-    ok $libsvm.check-parameter($problem, $parameter), "NU_SVC/POLY";
+    ok $libsvm.check-parameter($problem, $parameter), { "Given a setting of " ~ $_ ~ ", Algorithm::LibSVM.check-parameter should return True" }("NU_SVC/POLY");
     my $model = $libsvm.train($problem, $parameter);
-    is $model.predict(features => @test)<label>, 1.0e0;
+    is $model.predict(features => @test)<label>, 1.0e0, { "Given a setting of " ~ $_ ~ ", When Algorithm::LibSVM::Model.predict<label> predicts a label of a instance (where the instance is at the center of the cluster labeled as 1 in the training set), it should return 1.0e0" }("NU_SVC/POLY");
 }
 
 {
@@ -59,9 +59,9 @@ END
     my Algorithm::LibSVM::Parameter $parameter .= new(svm-type => NU_SVC,
                                                       kernel-type => RBF);
     my Algorithm::LibSVM::Problem $problem = $libsvm.load-problem(@train);
-    ok $libsvm.check-parameter($problem, $parameter), "NU_SVC/RBF";
+    ok $libsvm.check-parameter($problem, $parameter), { "Given a setting of " ~ $_ ~ ", Algorithm::LibSVM.check-parameter should return True" }("NU_SVC/RBF");
     my $model = $libsvm.train($problem, $parameter);
-    is $model.predict(features => @test)<label>, 1.0e0;
+    is $model.predict(features => @test)<label>, 1.0e0, { "Given a setting of " ~ $_ ~ ", When Algorithm::LibSVM::Model.predict<label> predicts a label of a instance (where the instance is at the center of the cluster labeled as 1 in the training set), it should return 1.0e0" }("NU_SVC/RBF");
 }
 
 {
@@ -69,9 +69,9 @@ END
     my Algorithm::LibSVM::Parameter $parameter .= new(svm-type => NU_SVC,
                                                       kernel-type => SIGMOID);
     my Algorithm::LibSVM::Problem $problem = $libsvm.load-problem(@train);
-    ok $libsvm.check-parameter($problem, $parameter), "NU_SVC/SIGMOID";
+    ok $libsvm.check-parameter($problem, $parameter), { "Given a setting of " ~ $_ ~ ", Algorithm::LibSVM.check-parameter should return True" }("NU_SVC/SIGMOID");
     my $model = $libsvm.train($problem, $parameter);
-    is $model.predict(features => @test)<label>, 1.0e0;
+    is $model.predict(features => @test)<label>, 1.0e0, { "Given a setting of " ~ $_ ~ ", When Algorithm::LibSVM::Model.predict<label> predicts a label of a instance (where the instance is at the center of the cluster labeled as 1 in the training set), it should return 1.0e0" }("NU_SVC/SIGMOID");
 }
 
 {
@@ -98,9 +98,9 @@ END
     my Algorithm::LibSVM::Parameter $parameter .= new(svm-type => NU_SVC,
                                                       kernel-type => PRECOMPUTED);
     my Algorithm::LibSVM::Problem $problem = $libsvm.load-problem(@train-matrix);
-    ok $libsvm.check-parameter($problem, $parameter), "NU_SVC/PRECOMPUTED";
+    ok $libsvm.check-parameter($problem, $parameter), { "Given a setting of " ~ $_ ~ ", Algorithm::LibSVM.check-parameter should return True" }("NU_SVC/PRECOMPUTED");
     my $model = $libsvm.train($problem, $parameter);
-    is $model.predict(features => @test-matrix)<label>, 1.0e0;
+    is $model.predict(features => @test-matrix)<label>, 1.0e0, { "Given a setting of " ~ $_ ~ ", When Algorithm::LibSVM::Model.predict<label> predicts a label of a instance (where the instance is at the center of the cluster labeled as 1 in the training set), it should return 1.0e0" }("NU_SVC/PRECOMPUTED");
 }
 
 done-testing;

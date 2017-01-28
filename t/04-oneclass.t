@@ -39,10 +39,10 @@ END
                                                       kernel-type => RBF,
                                                       nu => 1e-2);
     my Algorithm::LibSVM::Problem $problem = $libsvm.load-problem(@train);
-    ok $libsvm.check-parameter($problem, $parameter), "ONE_CLASS/RBF";
+    ok $libsvm.check-parameter($problem, $parameter), { "Given a setting of " ~ $_ ~ ", Algorithm::LibSVM.check-parameter should return True" }("ONE_CLASS/RBF");
     my $model = $libsvm.train($problem, $parameter);
-    is $model.predict(features => @test-in)<label>, 1.0e0;
-    is $model.predict(features => @test-out)<label>, -1.0e0;
+    is $model.predict(features => @test-in)<label>, 1.0e0, { "Given a setting of " ~ $_ ~ ", When Algorithm::LibSVM::Model.predict<label> predicts a label of a instance (where the instance is at the center in the training set), it should return 1.0e0" }("ONE_CLASS/RBF");
+    is $model.predict(features => @test-out)<label>, -1.0e0, { "Given a setting of " ~ $_ ~ ", When Algorithm::LibSVM::Model.predict<label> predicts a label of a instance (where the instance keeps at a distance from the center in the training set), it should return -1.0e0" }("ONE_CLASS/RBF");
 }
 
 done-testing;

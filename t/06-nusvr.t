@@ -18,7 +18,7 @@ use Algorithm::LibSVM::Model;
     my $expected = 2.0 * @test[0].value;
     my $mae = $model.svr-probability;
     my $std = sqrt(2.0 * $mae * $mae);
-    ok $expected - 5.0 * $std <= $actual <= $expected + 5.0 * $std;
+    ok $expected - 5.0 * $std <= $actual <= $expected + 5.0 * $std, { "Given a setting of " ~ $_ ~ ", Algorithm::LibSVM::Model.predict<label> should predict f(x)" }("NU_SVR/LINEAR");
 }
 
 done-testing;
