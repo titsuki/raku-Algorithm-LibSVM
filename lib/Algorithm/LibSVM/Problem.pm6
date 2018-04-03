@@ -3,7 +3,7 @@ use NativeCall;
 use Algorithm::LibSVM::Node;
 use NativeHelpers::Array;
 
-unit class Algorithm::LibSVM::Problem is export is repr('CStruct');
+unit class Algorithm::LibSVM::Problem:ver<0.0.2> is export is repr('CStruct');
 
 has int32 $.l;
 has CArray[num64] $!y;

@@ -4,6 +4,6 @@
 /src/svm.cpp
 /src/svm.h
 /.panda-work
-/resources/*.so
-/resources/*.dylib
+/resources/libraries/*.so
+/resources/libraries/*.dylib
 .precomp/

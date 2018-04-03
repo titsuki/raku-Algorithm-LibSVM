@@ -2,7 +2,7 @@ use v6;
 use NativeCall;
 use NativeHelpers::Array;
 
-unit class Algorithm::LibSVM::Parameter is export is repr('CStruct');
+unit class Algorithm::LibSVM::Parameter:ver<0.0.2> is export is repr('CStruct');
 
 my constant $library = %?RESOURCES<libraries/svm>.Str;
 
