@@ -5,9 +5,7 @@
   "build-depends" : [
     "LibraryMake"
   ],
-  "depends" : [
-    "NativeHelpers::Array"
-  ],
+  "depends" : [ ],
   "description" : "A Perl 6 bindings for libsvm",
   "license" : "MIT",
   "name" : "Algorithm::LibSVM",

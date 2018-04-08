@@ -1,6 +1,5 @@
 use v6;
 use NativeCall;
-use NativeHelpers::Array;
 
 unit class Algorithm::LibSVM::Parameter:ver<0.0.2> is export is repr('CStruct');
 
@@ -133,11 +132,11 @@ multi method nr-weight {
 # TODO: setter for weight-label, weight
 
 method weight-label {
-    copy-to-array($!weight_label, $!nr_weight);
+   $!weight_label.list
 }
 
 method weight {
-    copy-to-array($!weight, $!nr_weight);
+    $!nr_weight.list
 }
 
 multi method nu(Num:D $nu) {
