@@ -8,18 +8,18 @@ unit class Algorithm::LibSVM::Model:ver<0.0.2> is export is repr('CPointer');
 
 my constant $library = %?RESOURCES<libraries/svm>.Str;
 
-my sub svm_get_svm_type(Algorithm::LibSVM::Model) returns int32 is native($library) { * }
-my sub svm_get_nr_class(Algorithm::LibSVM::Model) returns int32 is native($library) { * }
+my sub svm_get_svm_type(Algorithm::LibSVM::Model --> int32) is native($library) { * }
+my sub svm_get_nr_class(Algorithm::LibSVM::Model --> int32) is native($library) { * }
 my sub svm_get_labels(Algorithm::LibSVM::Model, CArray[int32]) is native($library) { * }
 my sub svm_get_sv_indices(Algorithm::LibSVM::Model, CArray[int32]) is native($library) { * }
 my sub svm_get_nr_sv(Algorithm::LibSVM::Model) returns int32 is native($library) { * }
-my sub svm_get_svr_probability(Algorithm::LibSVM::Model) returns num64 is native($library) { * }
-my sub svm_predict_values(Algorithm::LibSVM::Model, Algorithm::LibSVM::Node, CArray[num64]) returns num64 is native($library) { * }
-my sub svm_predict(Algorithm::LibSVM::Model, Algorithm::LibSVM::Node) returns num64 is native($library) { * }
-my sub svm_predict_probability(Algorithm::LibSVM::Model, Algorithm::LibSVM::Node, CArray[num64]) returns num64 is native($library) { * }
+my sub svm_get_svr_probability(Algorithm::LibSVM::Model --> num64) is native($library) { * }
+my sub svm_predict_values(Algorithm::LibSVM::Model, Algorithm::LibSVM::Node, CArray[num64] --> num64) is native($library) { * }
+my sub svm_predict(Algorithm::LibSVM::Model, Algorithm::LibSVM::Node --> num64) is native($library) { * }
+my sub svm_predict_probability(Algorithm::LibSVM::Model, Algorithm::LibSVM::Node, CArray[num64] --> num64) is native($library) { * }
 my sub svm_free_model_content(Algorithm::LibSVM::Model) is native($library) { * }
 my sub svm_free_and_destroy_model(Algorithm::LibSVM::Model) is native($library) { * }
-my sub svm_check_probability_model(Algorithm::LibSVM::Model) returns int32 is native($library) { * }
+my sub svm_check_probability_model(Algorithm::LibSVM::Model --> int32) is native($library) { * }
 
 sub svm_save_model(Str, Algorithm::LibSVM::Model) is native($library) is export { * }
 
@@ -49,15 +49,15 @@ method sv-indices returns Array {
     copy-to-array($indices, self.nr-sv);
 }
 
-method nr-sv returns Int:D {
+method nr-sv(--> Int:D) {
     svm_get_nr_sv(self)
 }
 
-method svr-probability returns Num:D {
+method svr-probability(--> Num:D) {
     svm_get_svr_probability(self)
 }
 
-method !make-node-linked-list(:@features) returns Algorithm::LibSVM::Node {
+method !make-node-linked-list(:@features --> Algorithm::LibSVM::Node) {
     my Algorithm::LibSVM::Node $next .= new(index => -1, value => 0e0);
     for @features.sort({ $^b.key <=> $^a.key }) {
         $next = Algorithm::LibSVM::Node.new(index => .key, value => .value, next => $next);
@@ -65,7 +65,7 @@ method !make-node-linked-list(:@features) returns Algorithm::LibSVM::Node {
     $next;
 }
 
-method predict(:@features where Positional[Pair]|Array[Pair], Bool :$probability, Bool :$decision-values) returns Hash {
+method predict(:@features where Positional[Pair], Bool :$probability, Bool :$decision-values --> Hash) {
     my %result;
     if $probability and self.check-probability-model {
         my $prob-estimates = CArray[num64].new;
