@@ -160,7 +160,7 @@ multi method shrinking(Bool:D $shrinking) {
     $!shrinking = $shrinking ?? 1 !! 0;
 }
 
-multi method shrinking returns Bool {
+multi method shrinking(--> Bool) {
     Bool($!shrinking)
 }
 
@@ -168,7 +168,7 @@ multi method probability(Bool:D $probability) {
     $!probability = $probability ?? 1 !! 0;
 }
 
-multi method probability returns Bool {
+multi method probability(--> Bool) {
     Bool($!probability)
 }
 
