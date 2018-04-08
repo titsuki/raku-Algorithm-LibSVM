@@ -5,7 +5,6 @@ use Algorithm::LibSVM::Parameter;
 use Algorithm::LibSVM::Model;
 use Algorithm::LibSVM::Grammar;
 use Algorithm::LibSVM::Actions;
-use NativeHelpers::Array;
 
 unit class Algorithm::LibSVM:ver<0.0.2>;
 
@@ -28,11 +27,11 @@ submethod BUILD(Bool :$verbose? = False, Int :$seed = 1) {
     svm_set_srand($seed);
 }
 
-method cross-validation(Algorithm::LibSVM::Problem $problem, Algorithm::LibSVM::Parameter $param, Int $nr-fold) returns Array {
+method cross-validation(Algorithm::LibSVM::Problem $problem, Algorithm::LibSVM::Parameter $param, Int $nr-fold --> List) {
     my $target = CArray[num64].new;
     $target[$problem.l] = 0e0; # memory allocation
     svm_cross_validation($problem, $param, $nr-fold, $target);
-    copy-to-array($target, $problem.l);
+    $target.list
 }
 
 method check-parameter(Algorithm::LibSVM::Problem $problem, Algorithm::LibSVM::Parameter $param --> Bool) {

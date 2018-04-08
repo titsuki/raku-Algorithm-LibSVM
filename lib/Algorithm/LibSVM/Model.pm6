@@ -1,5 +1,4 @@
 use v6;
-use NativeHelpers::Array;
 use NativeCall;
 use Algorithm::LibSVM::Node;
 use Algorithm::LibSVM::Parameter;
@@ -35,18 +34,18 @@ method nr-class returns Int:D {
     svm_get_nr_class(self)
 }
 
-method labels returns Array {
+method labels(--> List) {
     my $labels = CArray[int32].new;
     $labels[self.nr-class - 1] = 0; # allocate memory
     svm_get_labels(self, $labels);
-    copy-to-array($labels, self.nr-class);
+    $labels.list
 }
 
-method sv-indices returns Array {
+method sv-indices(--> List) {
     my $indices = CArray[int32].new;
     $indices[self.nr-sv - 1] = 0; # allocate memory
     svm_get_sv_indices(self, $indices);
-    copy-to-array($indices, self.nr-sv);
+    $indices.list
 }
 
 method nr-sv(--> Int:D) {
@@ -71,17 +70,15 @@ method predict(:@features where Positional[Pair], Bool :$probability, Bool :$dec
         my $prob-estimates = CArray[num64].new;
         $prob-estimates[self.nr-class] = 0e0;
         my $label = svm_predict_probability(self, self!make-node-linked-list(:@features), $prob-estimates);
-        my @prob-estimates = copy-to-array($prob-estimates, self.nr-class);
         %result<label> = $label;
-        %result<prob-estimates> = @prob-estimates
+        %result<prob-estimates> = $prob-estimates.list;
     }
     if $decision-values {
         my $dec-values = CArray[num64].new;
         $dec-values[self.nr-class * (self.nr-class - 1) div 2] = 0e0;
         my $label = svm_predict_values(self, self!make-node-linked-list(:@features), $dec-values);
-        my @dec-values = copy-to-array($dec-values, self.nr-class * (self.nr-class - 1) div 2);
         %result<label> = $label;
-        %result<decision-values> = @dec-values;
+        %result<decision-values> = $dec-values.list;
     }
 
     if not $probability and not $decision-values {

@@ -1,7 +1,6 @@
 use v6;
 use NativeCall;
 use Algorithm::LibSVM::Node;
-use NativeHelpers::Array;
 
 unit class Algorithm::LibSVM::Problem:ver<0.0.2> is export is repr('CStruct');
 
@@ -15,12 +14,12 @@ method BUILD(int32 :$l, CArray[num64] :$y, CArray[Algorithm::LibSVM::Node] :$x) 
     $!x := $x;
 }
 
-method y returns Array {
-    copy-to-array($!y, $!l);
+method y(--> List) {
+    $!y.list
 }
 
-method x returns Array {
-    copy-to-array($!x, $!l);
+method x(--> List) {
+    $!x.list
 }
 
 =begin pod
