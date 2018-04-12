@@ -42,7 +42,7 @@ Algorithm::LibSVM::Problem is a Perl 6 Algorithm::LibSVM::Problem class
 
 Defined as:
 
-        method l returns Int:D
+        method l return(--> Int:D)
 
 Returns the number of the training data.
 
@@ -50,7 +50,7 @@ Returns the number of the training data.
 
 Defined as:
 
-        method y returns Array
+        method y(--> List)
 
 Returns the array containing the target values (C<Int> values in classification, C<Num> values in regression) of the training data.
 
@@ -58,7 +58,7 @@ Returns the array containing the target values (C<Int> values in classification,
 
 Defined as:
 
-        method x returns Array
+        method x(--> List)
 
 Returns the array of pointers, each of which points to a sparse representation (i.e. array of C<Algorithm::LibSVM::Node>) of one training vector.
 
