@@ -312,7 +312,7 @@ Are getter/setter methods for the parameter p.
 
 Defined as:
 
-       multi method shrinking returns Bool
+       multi method shrinking(--> Bool)
        multi method shrinking(Bool:D $shrinking)
 
 Are getter/setter methods for the parameter shrinking.
@@ -321,7 +321,7 @@ Are getter/setter methods for the parameter shrinking.
 
 Defined as:
 
-        multi method probability returns Bool
+        multi method probability(--> Bool)
         multi method probability(Bool:D $probability)
 
 Are getter/setter methods for the parameter probability.

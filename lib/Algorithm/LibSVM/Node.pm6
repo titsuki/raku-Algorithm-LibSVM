@@ -30,13 +30,13 @@ Algorithm::LibSVM::Node is a Perl 6 Algorithm::LibSVM::Node class
 
 Defined as:
 
-        method index returns Int:D
+        method index(--> Int:D)
 
 =head3 value
 
 Defined as:
 
-        method value returns Num:D
+        method value(--> Num:D)
 
 =head1 AUTHOR
 
