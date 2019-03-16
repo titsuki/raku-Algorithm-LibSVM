@@ -34,8 +34,8 @@
 // Algorithm::LibSVM -- A Perl 6 bindings for libsvm
 //  Copyright(C) 2017 titsuki <titsuki@cpan.org>
 // For more details, see the "LICENSE" file.
---- libsvm-3.22/svm.cpp	2016-12-22 02:58:58.000000000 +0900
-+++ libsvm-3.22-new/svm.cpp	2017-01-09 20:01:56.486976818 +0900
+--- src/3.22/svm.cpp	2019-03-16 16:25:24.653836819 +0900
++++ src/svm.cpp	2019-03-16 23:59:28.330521083 +0900
 @@ -246,7 +246,10 @@
  	}
  	double kernel_precomputed(int i, int j) const
@@ -122,6 +122,24 @@
  		default:
  			return 0;  // Unreachable 
  	}
+@@ -1965,7 +1972,7 @@
+ 				// ensure +1 -1 order; reason not using CV subroutine
+ 				dec_values[perm[j]] *= submodel->label[0];
+ 			}		
+-			svm_free_and_destroy_model(&submodel);
++			svm_free_and_destroy_model(submodel);
+ 			svm_destroy_param(&subparam);
+ 		}
+ 		free(subprob.x);
+@@ -2448,7 +2455,7 @@
+ 		else
+ 			for(j=begin;j<end;j++)
+ 				target[perm[j]] = svm_predict(submodel,prob->x[perm[j]]);
+-		svm_free_and_destroy_model(&submodel);
++		svm_free_and_destroy_model(submodel);
+ 		free(subprob.x);
+ 		free(subprob.y);
+ 	}		
 @@ -2729,7 +2736,7 @@
  			while(p->index != -1)
  			{
@@ -140,6 +158,25 @@
  			++j;
  		}
  		x_space[j++].index = -1;
+@@ -3027,13 +3034,13 @@
+ 	model_ptr->nSV = NULL;
+ }
+ 
+-void svm_free_and_destroy_model(svm_model** model_ptr_ptr)
++void svm_free_and_destroy_model(svm_model* model_ptr)
+ {
+-	if(model_ptr_ptr != NULL && *model_ptr_ptr != NULL)
++	if(model_ptr != NULL)
+ 	{
+-		svm_free_model_content(*model_ptr_ptr);
+-		free(*model_ptr_ptr);
+-		*model_ptr_ptr = NULL;
++		svm_free_model_content(model_ptr);
++		free(model_ptr);
++		model_ptr = NULL;
+ 	}
+ }
+ 
 @@ -3179,3 +3186,8 @@
  	else
  		svm_print_string = print_func;
