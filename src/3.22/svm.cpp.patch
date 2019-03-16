@@ -34,8 +34,8 @@
 // Algorithm::LibSVM -- A Perl 6 bindings for libsvm
 //  Copyright(C) 2017 titsuki <titsuki@cpan.org>
 // For more details, see the "LICENSE" file.
---- libsvm-3.22/svm.cpp	2016-12-22 02:58:58.000000000 +0900
-+++ libsvm-3.22-new/svm.cpp	2017-01-09 20:01:56.486976818 +0900
+--- ../libsvm-322/svm.cpp	2016-12-22 04:09:27.000000000 +0900
++++ src/svm.cpp	2019-03-16 16:38:25.231667587 +0900
 @@ -246,7 +246,10 @@
  	}
  	double kernel_precomputed(int i, int j) const
@@ -140,7 +140,21 @@
  			++j;
  		}
  		x_space[j++].index = -1;
-@@ -3179,3 +3186,8 @@
+@@ -3039,8 +3046,11 @@
+ 
+ void svm_destroy_param(svm_parameter* param)
+ {
+-	free(param->weight_label);
+-	free(param->weight);
++	if(param != NULL)
++	{
++		free(param->weight_label);
++		free(param->weight);
++	}
+ }
+ 
+ const char *svm_check_parameter(const svm_problem *prob, const svm_parameter *param)
+@@ -3179,3 +3189,8 @@
  	else
  		svm_print_string = print_func;
  }
