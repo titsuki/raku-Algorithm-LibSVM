@@ -35,15 +35,13 @@ method nr-class(--> Int:D) {
 }
 
 method labels(--> List) {
-    my $labels = CArray[int32].new;
-    $labels[self.nr-class - 1] = 0; # allocate memory
+    my $labels = CArray[int32].allocate: self.nr-class - 1;
     svm_get_labels(self, $labels);
     $labels.list
 }
 
 method sv-indices(--> List) {
-    my $indices = CArray[int32].new;
-    $indices[self.nr-sv - 1] = 0; # allocate memory
+    my $indices = CArray[int32].allocate: self.nr-sv - 1;
     svm_get_sv_indices(self, $indices);
     $indices.list
 }
@@ -67,15 +65,13 @@ method !make-node-linked-list(:@features --> Algorithm::LibSVM::Node) {
 method predict(:@features where Positional[Pair], Bool :$probability, Bool :$decision-values --> Hash) {
     my %result;
     if $probability and self.check-probability-model {
-        my $prob-estimates = CArray[num64].new;
-        $prob-estimates[self.nr-class] = 0e0;
+        my $prob-estimates = CArray[num64].allocate: self.nr-class;
         my $label = svm_predict_probability(self, self!make-node-linked-list(:@features), $prob-estimates);
         %result<label> = $label;
         %result<prob-estimates> = $prob-estimates.list;
     }
     if $decision-values {
-        my $dec-values = CArray[num64].new;
-        $dec-values[self.nr-class * (self.nr-class - 1) div 2] = 0e0;
+        my $dec-values = CArray[num64].allocate: self.nr-class * (self.nr-class - 1) div 2;
         my $label = svm_predict_values(self, self!make-node-linked-list(:@features), $dec-values);
         %result<label> = $label;
         %result<decision-values> = $dec-values.list;
