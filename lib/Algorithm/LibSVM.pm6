@@ -83,7 +83,7 @@ method load-model(Str $filename --> Algorithm::LibSVM::Model) {
 
 method evaluate(@true-values, @predicted-values --> Hash) {
     if @true-values.elems != @predicted-values.elems {
-        die 'ERROR: @true-values.elem != @predicted-values.elem';
+        die 'ERROR: @true-values.elems != @predicted-values.elems';
     }
     my ($total-correct, $total-error) = 0, 0;
     my ($sum-p, $sum-t, $sum-pp, $sum-tt, $sum-pt) = 0, 0, 0, 0, 0;
