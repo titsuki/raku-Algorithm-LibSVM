@@ -35,7 +35,7 @@
 //  Copyright(C) 2017 titsuki <titsuki@cpan.org>
 // For more details, see the "LICENSE" file.
 --- src/3.22/svm.cpp	2019-03-16 16:25:24.653836819 +0900
-+++ src/svm.cpp	2019-03-16 23:59:28.330521083 +0900
++++ src/svm.cpp	2019-10-03 00:28:29.639703564 +0900
 @@ -246,7 +246,10 @@
  	}
  	double kernel_precomputed(int i, int j) const
@@ -158,7 +158,7 @@
  			++j;
  		}
  		x_space[j++].index = -1;
-@@ -3027,13 +3034,13 @@
+@@ -3027,24 +3034,27 @@
  	model_ptr->nSV = NULL;
  }
  
@@ -177,7 +177,24 @@
  	}
  }
  
-@@ -3179,3 +3186,8 @@
+ void svm_destroy_param(svm_parameter* param)
+ {
+-	free(param->weight_label);
+-	free(param->weight);
++	if(param != NULL)
++	{
++		free(param->weight_label);
++		free(param->weight);
++	}
+ }
+ 
+ const char *svm_check_parameter(const svm_problem *prob, const svm_parameter *param)
+-{
++ {
+ 	// svm_type
+ 
+ 	int svm_type = param->svm_type;
+@@ -3179,3 +3189,8 @@
  	else
  		svm_print_string = print_func;
  }
