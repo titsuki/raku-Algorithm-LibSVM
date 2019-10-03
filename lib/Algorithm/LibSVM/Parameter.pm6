@@ -173,11 +173,11 @@ multi method probability(--> Bool) {
 
 my sub svm_destroy_param(Algorithm::LibSVM::Parameter) is native($library) { * }
 
-submethod DESTROY {
-    with self {
-        svm_destroy_param(self);
-    }
-}
+#submethod DESTROY {
+#    with self {
+#        svm_destroy_param(self);
+#    }
+#}
 
 =begin pod
 
