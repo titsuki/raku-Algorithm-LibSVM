@@ -92,7 +92,9 @@ method check-probability-model(--> Bool) {
 }
 
 submethod DESTROY {
-    svm_free_and_destroy_model(self)
+    with self {
+        svm_free_and_destroy_model(self)
+    }
 }
 
 =begin pod
