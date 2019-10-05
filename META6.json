@@ -17,7 +17,8 @@
     "Algorithm::LibSVM::Model" : "lib/Algorithm/LibSVM/Model.pm6",
     "Algorithm::LibSVM::Node" : "lib/Algorithm/LibSVM/Node.pm6",
     "Algorithm::LibSVM::Parameter" : "lib/Algorithm/LibSVM/Parameter.pm6",
-    "Algorithm::LibSVM::Problem" : "lib/Algorithm/LibSVM/Problem.pm6"
+    "Algorithm::LibSVM::Problem" : "lib/Algorithm/LibSVM/Problem.pm6",
+    "Build" : "lib/Build.pm"
   },
   "resources" : [
     "libraries/svm"
@@ -25,5 +26,5 @@
   "source-url" : "git://github.com/titsuki/p6-Algorithm-LibSVM.git",
   "tags" : [ ],
   "test-depends" : [ ],
-  "version" : "0.0.4"
+  "version" : "0.0.5"
 }

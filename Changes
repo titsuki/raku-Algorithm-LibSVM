@@ -2,6 +2,10 @@ Revision history for Algorithm-LibSVM
 
 {{$NEXT}}
 
+0.0.5  2019-10-05T22:30:22+09:00
+    - Fix double free [#37]
+    - Fix memory allocation way (i.e., Use .allocate) [#36]
+
 0.0.4  2019-03-17T00:27:33+09:00
     - Use single pointer instead of pointer of pointer [#33]
 
