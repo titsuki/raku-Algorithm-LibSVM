@@ -3,7 +3,7 @@ use NativeCall;
 use Algorithm::LibSVM::Node;
 use Algorithm::LibSVM::Parameter;
 
-unit class Algorithm::LibSVM::Model:ver<0.0.5> is export is repr('CPointer'); 
+unit class Algorithm::LibSVM::Model:ver<0.0.6> is export is repr('CPointer'); 
 
 my constant $library = %?RESOURCES<libraries/svm>.Str;
 

@@ -6,7 +6,7 @@ use Algorithm::LibSVM::Model;
 use Algorithm::LibSVM::Grammar;
 use Algorithm::LibSVM::Actions;
 
-unit class Algorithm::LibSVM:ver<0.0.5>;
+unit class Algorithm::LibSVM:ver<0.0.6>;
 
 has Int $.nr-feature;
 

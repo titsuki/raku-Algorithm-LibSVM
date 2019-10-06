@@ -2,6 +2,9 @@ Revision history for Algorithm-LibSVM
 
 {{$NEXT}}
 
+0.0.6  2019-10-06T23:37:50+09:00
+    - Delete Build.pm and add CustomBuilder
+
 0.0.5  2019-10-05T22:30:22+09:00
     - Fix double free [#37]
     - Fix memory allocation way (i.e., Use .allocate) [#36]

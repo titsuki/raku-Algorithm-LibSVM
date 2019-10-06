@@ -1,7 +1,7 @@
 use v6;
 use NativeCall;
 
-unit class Algorithm::LibSVM::Parameter:ver<0.0.5> is export is repr('CStruct');
+unit class Algorithm::LibSVM::Parameter:ver<0.0.6> is export is repr('CStruct');
 
 my constant $library = %?RESOURCES<libraries/svm>.Str;
 
