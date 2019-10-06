@@ -1,7 +1,9 @@
 use LibraryMake;
+use Distribution::Builder::MakeFromJSON;
 
-class Build {
-    method build($workdir) {
+class Algorithm::LibSVM::CustomBuilder:ver<0.0.5> is Distribution::Builder::MakeFromJSON {
+    method build(IO() $work-dir = $*CWD) {
+        my $workdir = ~$work-dir;
 	my $srcdir = "$workdir/src";
 	my %vars = get-vars($workdir);
 	%vars<svm> = $*VM.platform-library-name('svm'.IO);
@@ -18,10 +20,5 @@ class Build {
 	}
 	shell(%vars<MAKE>);
 	chdir($goback);
-    }
-    
-    method isa($what) {
-	return True if $what.^name eq 'Panda::Builder';
-	callsame;
     }
 }
