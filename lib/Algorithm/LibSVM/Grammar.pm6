@@ -4,9 +4,10 @@ unit grammar Algorithm::LibSVM::Grammar:ver<0.0.6>;
 token TOP { <bodylist> }
 token number { '-'* \d+ [ \. \d+ ]? }
 token integer { \d+ }
+token comment { '#' <-[\:] -[\n]>+ }
 rule bodylist { [ <body> \n? ]+ }
-rule body { <number> <ws> <pairlist> }
-rule pairlist { [ <pair> <ws>? ]+ }
+rule body { <number> <ws> <pairlist> <ws>? <comment>? }
+rule pairlist { <pair>+ %% <ws> }
 rule pair { <key=.integer> ':' <value=.number> }
 
 =begin pod
