@@ -2,6 +2,9 @@ Revision history for Algorithm-LibSVM
 
 {{$NEXT}}
 
+0.0.7  2019-10-15T07:05:00+09:00
+    - Enable to parse libsvm format files that contain comments [#41]
+
 0.0.6  2019-10-06T23:37:50+09:00
     - Delete Build.pm and add CustomBuilder
 
