@@ -171,7 +171,7 @@ Returns the probability predicted by support vector regression.
 
 Defined as:
 
-        method predict(Pair :@features, Bool :$probability, Bool :$decision-values --> Hash)
+        method predict(:$features where { .all ~~ Pair }, Bool :$probability, Bool :$decision-values --> Hash)
 
 Conducts the prediction and returns its results.
 
