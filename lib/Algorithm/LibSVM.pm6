@@ -28,6 +28,9 @@ submethod BUILD(Bool :$verbose? = False, Int :$seed = 1) {
 }
 
 method cross-validation(Algorithm::LibSVM::Problem $problem, Algorithm::LibSVM::Parameter $param, Int $nr-fold --> List) {
+    if $param.gamma == 0 && $!nr-feature > 0 {
+        $param.gamma((1.0 / $!nr-feature).Num);
+    }
     my $target = CArray[num64].allocate: $problem.l;
     svm_cross_validation($problem, $param, $nr-fold, $target);
     $target.list
