@@ -54,31 +54,31 @@ method svr-probability(--> Num:D) {
     svm_get_svr_probability(self)
 }
 
-method !make-node-linked-list(:@features --> Algorithm::LibSVM::Node) {
+method !make-node-linked-list(:$features --> Algorithm::LibSVM::Node) {
     my Algorithm::LibSVM::Node $next .= new(index => -1, value => 0e0);
-    for @features.sort({ $^b.key <=> $^a.key }) {
+    for @($features).sort({ $^b.key <=> $^a.key }) {
         $next = Algorithm::LibSVM::Node.new(index => .key, value => .value, next => $next);
     }
     $next;
 }
 
-method predict(:@features where Positional[Pair], Bool :$probability, Bool :$decision-values --> Hash) {
+method predict(:$features where { .all ~~ Pair }, Bool :$probability, Bool :$decision-values --> Hash) {
     my %result;
     if $probability and self.check-probability-model {
         my $prob-estimates = CArray[num64].allocate: self.nr-class;
-        my $label = svm_predict_probability(self, self!make-node-linked-list(:@features), $prob-estimates);
+        my $label = svm_predict_probability(self, self!make-node-linked-list(:$features), $prob-estimates);
         %result<label> = $label;
         %result<prob-estimates> = $prob-estimates.list;
     }
     if $decision-values {
         my $dec-values = CArray[num64].allocate: self.nr-class * (self.nr-class - 1) div 2;
-        my $label = svm_predict_values(self, self!make-node-linked-list(:@features), $dec-values);
+        my $label = svm_predict_values(self, self!make-node-linked-list(:$features), $dec-values);
         %result<label> = $label;
         %result<decision-values> = $dec-values.list;
     }
 
     if not $probability and not $decision-values {
-        %result<label> = svm_predict(self, self!make-node-linked-list(:@features));
+        %result<label> = svm_predict(self, self!make-node-linked-list(:$features));
     }
     %result;
 }
@@ -171,7 +171,7 @@ Returns the probability predicted by support vector regression.
 
 Defined as:
 
-        method predict(Pair :@features, Bool :$probability, Bool :$decision-values --> Hash)
+        method predict(:$features where { .all ~~ Pair }, Bool :$probability, Bool :$decision-values --> Hash)
 
 Conducts the prediction and returns its results.
 
