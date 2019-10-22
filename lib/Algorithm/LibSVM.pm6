@@ -63,11 +63,11 @@ method !_load-problem(\lines) {
     
     my $y-idx = 0;
     for lines -> $line {
-        my ($label, $features) = $line.trim.split(/\s+/,2);
-        my @feature-list = $features.split(/\s+/);
+        my $parsed = Algorithm::LibSVM::Grammar.parse($line, actions => Algorithm::LibSVM::Actions).made;
+        my ($label, $feature) = $parsed.head<label>, $parsed.head<pairs>;
 
         my $next = Algorithm::LibSVM::Node.new(index => -1, value => 0e0);
-        for @feature-list>>.split(":", :skip-empty).map({ .[0] => .[1] }).sort(-*.key).map({ .key, .value }) -> ($index, $value) {
+        for @($feature).sort(-*.key).map({ .key, .value }) -> ($index, $value) {
             $!nr-feature = ($!nr-feature, $index.Int).max;
             $next = Algorithm::LibSVM::Node.new(index => $index.Int, value => $value.Num, next => $next);
         }
