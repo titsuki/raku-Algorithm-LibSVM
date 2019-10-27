@@ -2,6 +2,9 @@ Revision history for Algorithm-LibSVM
 
 {{$NEXT}}
 
+0.0.9  2019-10-27T22:25:03+09:00
+    - load-problem takes into account comment lines [#46]
+
 0.0.8  2019-10-20T18:51:36+09:00
     - Fix default gamma value [#44]
     - Use .all ~~ Pair comparison instead of Positional[Pair] constraint [#45]

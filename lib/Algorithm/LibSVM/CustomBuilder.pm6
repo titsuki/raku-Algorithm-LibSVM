@@ -1,7 +1,7 @@
 use LibraryMake;
 use Distribution::Builder::MakeFromJSON;
 
-class Algorithm::LibSVM::CustomBuilder:ver<0.0.8> is Distribution::Builder::MakeFromJSON {
+class Algorithm::LibSVM::CustomBuilder:ver<0.0.9> is Distribution::Builder::MakeFromJSON {
     method build(IO() $work-dir = $*CWD) {
         my $workdir = ~$work-dir;
 	my $srcdir = "$workdir/src";
