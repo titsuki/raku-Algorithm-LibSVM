@@ -4,7 +4,8 @@
   ],
   "build-depends" : [
     "LibraryMake",
-    "Distribution::Builder::MakeFromJSON"
+    "Distribution::Builder::MakeFromJSON",
+    "Algorithm::LibSVM::CustomBuilder"
   ],
   "builder" : "Algorithm::LibSVM::CustomBuilder",
   "depends" : [ ],
