@@ -1,6 +1,6 @@
 use v6;
 
-unit class Algorithm::LibSVM::Node:ver<0.0.9> is export is repr('CStruct');
+unit class Algorithm::LibSVM::Node:ver<0.0.10> is export is repr('CStruct');
 
 has int32 $.index;
 has num64 $.value;
