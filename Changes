@@ -2,6 +2,9 @@ Revision history for Algorithm-LibSVM
 
 {{$NEXT}}
 
+0.0.11  2019-12-24T00:48:50+09:00
+    - Replace p6/perl6 with raku
+
 0.0.10  2019-12-18T07:57:34+09:00
     - Add CustomBuilder into build-depends
 
