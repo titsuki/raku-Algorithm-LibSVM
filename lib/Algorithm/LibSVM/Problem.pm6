@@ -26,7 +26,7 @@ method x(--> List) {
 
 =head1 NAME
 
-Algorithm::LibSVM::Problem - A Perl 6 Algorithm::LibSVM::Problem class
+Algorithm::LibSVM::Problem - A Raku Algorithm::LibSVM::Problem class
 
 =head1 SYNOPSIS
 
@@ -34,7 +34,7 @@ Algorithm::LibSVM::Problem - A Perl 6 Algorithm::LibSVM::Problem class
 
 =head1 DESCRIPTION
 
-Algorithm::LibSVM::Problem is a Perl 6 Algorithm::LibSVM::Problem class
+Algorithm::LibSVM::Problem is a Raku Algorithm::LibSVM::Problem class
 
 =head2 METHODS
 

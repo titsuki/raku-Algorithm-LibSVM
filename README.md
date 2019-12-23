@@ -1,9 +1,9 @@
-[![Build Status](https://travis-ci.org/titsuki/p6-Algorithm-LibSVM.svg?branch=master)](https://travis-ci.org/titsuki/p6-Algorithm-LibSVM)
+[![Build Status](https://travis-ci.org/titsuki/raku-Algorithm-LibSVM.svg?branch=master)](https://travis-ci.org/titsuki/raku-Algorithm-LibSVM)
 
 NAME
 ====
 
-Algorithm::LibSVM - A Perl 6 bindings for libsvm
+Algorithm::LibSVM - A Raku bindings for libsvm
 
 SYNOPSIS
 ========
@@ -70,7 +70,7 @@ EXAMPLE 2
 DESCRIPTION
 ===========
 
-Algorithm::LibSVM is a Perl 6 bindings for libsvm.
+Algorithm::LibSVM is a Raku bindings for libsvm.
 
 METHODS
 -------

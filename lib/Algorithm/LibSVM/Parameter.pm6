@@ -181,7 +181,7 @@ multi method probability(--> Bool) {
 
 =head1 NAME
 
-Algorithm::LibSVM::Parameter - A Perl 6 Algorithm::LibSVM::Parameter class
+Algorithm::LibSVM::Parameter - A Raku Algorithm::LibSVM::Parameter class
 
 =head1 SYNOPSIS
 
@@ -189,7 +189,7 @@ Algorithm::LibSVM::Parameter - A Perl 6 Algorithm::LibSVM::Parameter class
 
 =head1 DESCRIPTION
 
-Algorithm::LibSVM::Parameter is a Perl 6 Algorithm::LibSVM::Parameter class
+Algorithm::LibSVM::Parameter is a Raku Algorithm::LibSVM::Parameter class
 
 =head2 METHODS
 

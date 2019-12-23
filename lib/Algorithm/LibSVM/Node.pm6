@@ -14,7 +14,7 @@ submethod BUILD(Int:D :$!index, Num:D :$!value, Algorithm::LibSVM::Node :$next) 
 
 =head1 NAME
 
-Algorithm::LibSVM::Node - A Perl 6 Algorithm::LibSVM::Node class
+Algorithm::LibSVM::Node - A Raku Algorithm::LibSVM::Node class
 
 =head1 SYNOPSIS
 
@@ -22,7 +22,7 @@ Algorithm::LibSVM::Node - A Perl 6 Algorithm::LibSVM::Node class
 
 =head1 DESCRIPTION
 
-Algorithm::LibSVM::Node is a Perl 6 Algorithm::LibSVM::Node class
+Algorithm::LibSVM::Node is a Raku Algorithm::LibSVM::Node class
 
 =head2 METHODS
 

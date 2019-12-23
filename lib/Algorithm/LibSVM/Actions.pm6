@@ -11,7 +11,7 @@ method pair($/) { make $<key>.Int => $<value>.Num }
 
 =head1 NAME
 
-Algorithm::LibSVM::Actions - A Perl 6 Algorithm::LibSVM::Actions class
+Algorithm::LibSVM::Actions - A Raku Algorithm::LibSVM::Actions class
 
 =head1 SYNOPSIS
 
@@ -19,7 +19,7 @@ Algorithm::LibSVM::Actions - A Perl 6 Algorithm::LibSVM::Actions class
 
 =head1 DESCRIPTION
 
-Algorithm::LibSVM::Actions is a Perl 6 Algorithm::LibSVM::Actions class
+Algorithm::LibSVM::Actions is a Raku Algorithm::LibSVM::Actions class
 
 =head1 AUTHOR
 

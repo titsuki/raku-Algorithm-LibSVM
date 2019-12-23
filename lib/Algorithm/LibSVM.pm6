@@ -122,7 +122,7 @@ sub parse-libsvmformat(Str $text --> List) is export {
 
 =head1 NAME
 
-Algorithm::LibSVM - A Perl 6 bindings for libsvm
+Algorithm::LibSVM - A Raku bindings for libsvm
 
 =head1 SYNOPSIS
 
@@ -185,7 +185,7 @@ Algorithm::LibSVM - A Perl 6 bindings for libsvm
 
 =head1 DESCRIPTION
 
-Algorithm::LibSVM is a Perl 6 bindings for libsvm.
+Algorithm::LibSVM is a Raku bindings for libsvm.
 
 =head2 METHODS
 

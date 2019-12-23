@@ -14,7 +14,7 @@ rule pair { <key=.integer> ':' <value=.number> }
 
 =head1 NAME
 
-Algorithm::LibSVM::Grammar - A Perl 6 Algorithm::LibSVM::Grammar class
+Algorithm::LibSVM::Grammar - A Raku Algorithm::LibSVM::Grammar class
 
 =head1 SYNOPSIS
 
@@ -22,7 +22,7 @@ Algorithm::LibSVM::Grammar - A Perl 6 Algorithm::LibSVM::Grammar class
 
 =head1 DESCRIPTION
 
-Algorithm::LibSVM::Grammar is a Perl 6 Algorithm::LibSVM::Grammar class
+Algorithm::LibSVM::Grammar is a Raku Algorithm::LibSVM::Grammar class
 
 =head1 AUTHOR
 

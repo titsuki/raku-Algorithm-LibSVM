@@ -31,7 +31,7 @@
 // SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 // Relicensed under the MIT:
-// Algorithm::LibSVM -- A Perl 6 bindings for libsvm
+// Algorithm::LibSVM -- A Raku bindings for libsvm
 //  Copyright(C) 2017 titsuki <titsuki@cpan.org>
 // For more details, see the "LICENSE" file.
 --- src/3.22/svm.h	2018-12-23 12:03:17.240868971 +0900

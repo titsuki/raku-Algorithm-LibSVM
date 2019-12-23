@@ -99,7 +99,7 @@ method check-probability-model(--> Bool) {
 
 =head1 NAME
 
-Algorithm::LibSVM::Model - A Perl 6 Algorithm::LibSVM::Model class
+Algorithm::LibSVM::Model - A Raku Algorithm::LibSVM::Model class
 
 =head1 SYNOPSIS
 
@@ -107,7 +107,7 @@ Algorithm::LibSVM::Model - A Perl 6 Algorithm::LibSVM::Model class
 
 =head1 DESCRIPTION
 
-Algorithm::LibSVM::Model is a Perl 6 Algorithm::LibSVM::Model class
+Algorithm::LibSVM::Model is a Raku Algorithm::LibSVM::Model class
 
 =head2 METHODS
 
