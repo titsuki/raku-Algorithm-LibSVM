@@ -115,7 +115,7 @@ method evaluate(@true-values, @predicted-values --> Hash) {
 }
 
 sub parse-libsvmformat(Str $text --> List) is export {
-    Algorithm::LibSVM::Grammar.parse($text, actions => Algorithm::LibSVM::Actions).made
+    Algorithm::LibSVM::Grammar.parse($text, actions => Algorithm::LibSVM::Actions).made or die
 }
 
 =begin pod
