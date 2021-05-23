@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/titsuki/raku-Algorithm-LibSVM.svg?branch=master)](https://travis-ci.org/titsuki/raku-Algorithm-LibSVM)
+[![Actions Status](https://github.com/titsuki/raku-Algorithm-LibSVM/workflows/test/badge.svg)](https://github.com/titsuki/raku-Algorithm-LibSVM/actions)
 
 NAME
 ====
