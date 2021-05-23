@@ -35,6 +35,18 @@ ok myhash[1]<pairs> ~~ (1 => 0.2, 2 => 0.3);
 
 }, "parse-libsvmformat should parse lines which contain label, features and comment";
 
+lives-ok {
+
+my Pair @test1 = parse-libsvmformat(q:to/END/).head<pairs>.flat;
+1 1:0.5 2:9.954492307950868e-05
+END
+
+my Pair @test2 = parse-libsvmformat(q:to/END/).head<pairs>.flat;
+1 1:0.5 2:9.954492307950868e05
+END
+
+}, "Any Num numbers with e or e- expression are parsable";
+
 dies-ok {
 
 my Pair @test = parse-libsvmformat(q:to/END/).head<pairs>.flat;
