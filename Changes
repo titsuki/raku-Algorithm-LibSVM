@@ -2,6 +2,9 @@ Revision history for Algorithm-LibSVM
 
 {{$NEXT}}
 
+0.0.13  2021-05-23T14:55:51+09:00
+    - Even if given Num (stringified) include "e" the parser doesn't fail now [#54]
+
 0.0.12  2021-05-23T14:07:36+09:00
     - Migrate to Github actions [#52]
     - Add "or die" at the end of parser process [#51]
