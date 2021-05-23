@@ -24,7 +24,6 @@ sub gen-train {
 
 }
 my @train = gen-train;
-say @train;
 
 my Pair @test-in = parse-libsvmformat(q:to:c/END/).head<pairs>.flat;
 1 1:{sqrt(0)} 2:{sqrt(0)}
