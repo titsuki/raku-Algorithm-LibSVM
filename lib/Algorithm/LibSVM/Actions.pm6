@@ -1,5 +1,5 @@
 use v6;
-unit class Algorithm::LibSVM::Actions:ver<0.0.11>;
+unit class Algorithm::LibSVM::Actions:ver<0.0.12>;
 
 method TOP($/) { make $<bodylist>.made }
 method bodylist($/) { make $<body>>>.made }

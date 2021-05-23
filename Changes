@@ -2,6 +2,11 @@ Revision history for Algorithm-LibSVM
 
 {{$NEXT}}
 
+0.0.12  2021-05-23T14:07:36+09:00
+    - Migrate to Github actions [#52]
+    - Add "or die" at the end of parser process [#51]
+    - Use libsvm 3.25 instead of 3.22 [#50]
+
 0.0.11  2019-12-24T00:48:50+09:00
     - Replace p6/perl6 with raku
 
