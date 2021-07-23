@@ -15,11 +15,15 @@ method BUILD(int32 :$l, CArray[num64] :$y, CArray[Algorithm::LibSVM::Node] :$x) 
 }
 
 method y(--> List) {
-    $!y.list
+    my @ret;
+    @ret[$_] = $!y[$_] for ^$!l;
+    @ret
 }
 
 method x(--> List) {
-    $!x.list
+    my @ret;
+    @ret[$_] = $!x[$_] for ^$!l;
+    @ret
 }
 
 =begin pod
