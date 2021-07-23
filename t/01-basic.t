@@ -17,7 +17,7 @@ use Algorithm::LibSVM::Model;
         my @lines = (("1 1:0" xx 100), ("0 1:1" xx 100)).flat;
         my $libsvm = Algorithm::LibSVM.new;
         my $problem = $libsvm.load-problem(@lines);
-        my Algorithm::LibSVM::Parameter $parameter .= new(svm-type => C_SVC,
+        my Algorithm::LibSVM::Parameter $parameter .= new(svm-type => C_SVC, kernel-type => RBF);
         my @r = $libsvm.cross-validation($problem, $parameter, 10);
         $libsvm.evaluate($problem.y, @r);
     }, "Make sure problem.y is feasible even if its instance was used by cross-validation (#55)";
