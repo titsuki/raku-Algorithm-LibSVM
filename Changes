@@ -2,6 +2,9 @@ Revision history for Algorithm-LibSVM
 
 {{$NEXT}}
 
+0.0.14  2021-07-23T13:38:45+09:00
+    - Make sure problem.y is feasible even if its instance was used by cross-validation [#56]
+
 0.0.13  2021-05-23T14:55:51+09:00
     - Even if given Num (stringified) include "e" the parser doesn't fail now [#54]
 
