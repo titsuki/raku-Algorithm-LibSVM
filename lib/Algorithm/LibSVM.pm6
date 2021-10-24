@@ -8,13 +8,11 @@ use Algorithm::LibSVM::Actions;
 
 unit class Algorithm::LibSVM:ver<0.0.14>;
 
-has Int $.nr-feature;
-
 my constant $library = %?RESOURCES<libraries/svm>.Str;
 
-my sub svm_cross_validation(Algorithm::LibSVM::Problem, Algorithm::LibSVM::Parameter, int32, CArray[num64]) is native($library) { * }
-my sub svm_train(Algorithm::LibSVM::Problem, Algorithm::LibSVM::Parameter --> Algorithm::LibSVM::Model) is native($library) { * }
-my sub svm_check_parameter(Algorithm::LibSVM::Problem, Algorithm::LibSVM::Parameter --> Str) is native($library) { * }
+my sub svm_cross_validation(Algorithm::LibSVM::CProblem, Algorithm::LibSVM::Parameter, int32, CArray[num64]) is native($library) { * }
+my sub svm_train(Algorithm::LibSVM::CProblem, Algorithm::LibSVM::Parameter --> Algorithm::LibSVM::Model) is native($library) { * }
+my sub svm_check_parameter(Algorithm::LibSVM::CProblem, Algorithm::LibSVM::Parameter --> Str) is native($library) { * }
 my sub print_string_stdout(Str --> Pointer[void]) is native($library) { * }
 my sub svm_set_print_string_function(&print_func (Str --> Pointer[void])) is native($library) { * }
 my sub svm_set_srand(int32) is native($library) { * }
@@ -28,25 +26,25 @@ submethod BUILD(Bool :$verbose? = False, Int :$seed = 1) {
 }
 
 method cross-validation(Algorithm::LibSVM::Problem $problem, Algorithm::LibSVM::Parameter $param, Int $nr-fold --> List) {
-    if $param.gamma == 0 && $!nr-feature > 0 {
-        $param.gamma((1.0 / $!nr-feature).Num);
+    if $param.gamma == 0 && $problem.nr-feature > 0 {
+        $param.gamma((1.0 / $problem.nr-feature).Num);
     }
     my $target = CArray[num64].allocate: $problem.l;
-    svm_cross_validation($problem, $param, $nr-fold, $target);
+    svm_cross_validation($problem.as-c, $param, $nr-fold, $target);
     $target.list
 }
 
 method check-parameter(Algorithm::LibSVM::Problem $problem, Algorithm::LibSVM::Parameter $param --> Bool) {
-    my $msg = svm_check_parameter($problem, $param);
+    my $msg = svm_check_parameter($problem.as-c, $param);
     die "$msg" if $msg.defined;
     True
 }
 
 method train(Algorithm::LibSVM::Problem $problem, Algorithm::LibSVM::Parameter $param --> Algorithm::LibSVM::Model) {
-    if $param.gamma == 0 && $!nr-feature > 0 {
-        $param.gamma((1.0 / $!nr-feature).Num);
+    if $param.gamma == 0 && $problem.nr-feature > 0 {
+        $param.gamma((1.0 / $problem.nr-feature).Num);
     }
-    svm_train($problem, $param) if self.check-parameter($problem, $param);
+    svm_train($problem.as-c, $param) if self.check-parameter($problem, $param);
 }
 
 multi method load-problem(\lines --> Algorithm::LibSVM::Problem) {
@@ -58,6 +56,7 @@ multi method load-problem(Str $filename --> Algorithm::LibSVM::Problem) {
 }
 
 method !_load-problem(\lines) {
+    my $nr-feature = 0;
     my $prob-y = CArray[num64].new;
     my $prob-x = CArray[Algorithm::LibSVM::Node].new;
     
@@ -68,14 +67,14 @@ method !_load-problem(\lines) {
 
         my $next = Algorithm::LibSVM::Node.new(index => -1, value => 0e0);
         for @($feature).sort(-*.key).map({ .key, .value }) -> ($index, $value) {
-            $!nr-feature = ($!nr-feature, $index.Int).max;
+            $nr-feature = ($nr-feature, $index.Int).max;
             $next = Algorithm::LibSVM::Node.new(index => $index.Int, value => $value.Num, next => $next);
         }
         $prob-y[$y-idx] = $label.Num;
         $prob-x[$y-idx] = $next;
         $y-idx++;
     }
-    return Algorithm::LibSVM::Problem.new(l => $y-idx, y => $prob-y, x => $prob-x);
+    return Algorithm::LibSVM::Problem.new(l => $y-idx, y => $prob-y, x => $prob-x, :$nr-feature);
 }
 
 my sub svm_load_model(Str --> Algorithm::LibSVM::Model) is native($library) { * }
