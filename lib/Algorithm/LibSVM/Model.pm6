@@ -84,7 +84,7 @@ method predict(:$features where { .all ~~ Pair }, Bool :$probability, Bool :$dec
 }
 
 method check-probability-model(--> Bool) {
-    my $ok = Bool(svm_check_probability_model(self));
+    my $ok = Bool(svm_check_probability_model(self) == 0 ?? False !! True);
     if not $ok {
         die "ERROR: Given model cannot compute probability.";
     }
