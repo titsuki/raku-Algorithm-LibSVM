@@ -47,36 +47,6 @@ method train(Algorithm::LibSVM::Problem $problem, Algorithm::LibSVM::Parameter $
     svm_train($problem.as-c, $param) if self.check-parameter($problem, $param);
 }
 
-multi method load-problem(\lines --> Algorithm::LibSVM::Problem) {
-    self!_load-problem(lines)
-}
-
-multi method load-problem(Str $filename --> Algorithm::LibSVM::Problem) {
-    self!_load-problem($filename.IO.lines)
-}
-
-method !_load-problem(\lines) {
-    my $nr-feature = 0;
-    my $prob-y = CArray[num64].new;
-    my $prob-x = CArray[Algorithm::LibSVM::Node].new;
-    
-    my $y-idx = 0;
-    for lines -> $line {
-        my $parsed = Algorithm::LibSVM::Grammar.parse($line, actions => Algorithm::LibSVM::Actions).made;
-        my ($label, $feature) = $parsed.head<label>, $parsed.head<pairs>;
-
-        my $next = Algorithm::LibSVM::Node.new(index => -1, value => 0e0);
-        for @($feature).sort(-*.key).map({ .key, .value }) -> ($index, $value) {
-            $nr-feature = ($nr-feature, $index.Int).max;
-            $next = Algorithm::LibSVM::Node.new(index => $index.Int, value => $value.Num, next => $next);
-        }
-        $prob-y[$y-idx] = $label.Num;
-        $prob-x[$y-idx] = $next;
-        $y-idx++;
-    }
-    return Algorithm::LibSVM::Problem.new(l => $y-idx, y => $prob-y, x => $prob-x, :$nr-feature);
-}
-
 my sub svm_load_model(Str --> Algorithm::LibSVM::Model) is native($library) { * }
 
 method load-model(Str $filename --> Algorithm::LibSVM::Model) {
@@ -115,6 +85,15 @@ method evaluate(@true-values, @predicted-values --> Hash) {
 
 sub parse-libsvmformat(Str $text --> List) is export {
     Algorithm::LibSVM::Grammar.parse($text, actions => Algorithm::LibSVM::Actions).made or die
+}
+
+my constant $msg = "Algorithm::LibSVM::Problem.from-file";
+multi method load-problem(\lines --> Algorithm::LibSVM::Problem) is DEPRECATED($msg) {
+    Algorithm::LibSVM::Problem._load-problem(lines)
+}
+
+multi method load-problem(Str $filename --> Algorithm::LibSVM::Problem) is DEPRECATED($msg) {
+    Algorithm::LibSVM::Problem._load-problem($filename.IO.lines)
 }
 
 =begin pod
@@ -208,7 +187,7 @@ Trains a SVM model.
 
 =item C<$param> The instance of Algorithm::LibSVM::Parameter.
 
-=head3 load-problem
+=head3 B<DEPRECATED> load-problem
 
 Defined as:
 

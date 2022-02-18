@@ -95,7 +95,7 @@ Trains a SVM model.
 
   * `$param` The instance of Algorithm::LibSVM::Parameter.
 
-### load-problem
+### **DEPRECATED** load-problem
 
 Defined as:
 

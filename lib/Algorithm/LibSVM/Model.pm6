@@ -35,13 +35,13 @@ method nr-class(--> Int:D) {
 }
 
 method labels(--> List) {
-    my $labels = CArray[int32].allocate: self.nr-class - 1;
+    my $labels = CArray[int32].allocate: self.nr-class;
     svm_get_labels(self, $labels);
     $labels.list
 }
 
 method sv-indices(--> List) {
-    my $indices = CArray[int32].allocate: self.nr-sv - 1;
+    my $indices = CArray[int32].allocate: self.nr-sv;
     svm_get_sv_indices(self, $indices);
     $indices.list
 }
@@ -57,7 +57,7 @@ method svr-probability(--> Num:D) {
 method !make-node-linked-list(:$features --> Algorithm::LibSVM::Node) {
     my Algorithm::LibSVM::Node $next .= new(index => -1, value => 0e0);
     for @($features).sort({ $^b.key <=> $^a.key }) {
-        $next = Algorithm::LibSVM::Node.new(index => .key, value => .value, next => $next);
+        $next = Algorithm::LibSVM::Node.new(index => .key, value => .value.Num, next => $next);
     }
     $next;
 }
