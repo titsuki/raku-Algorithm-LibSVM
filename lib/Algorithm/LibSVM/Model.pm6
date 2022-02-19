@@ -35,13 +35,13 @@ method nr-class(--> Int:D) {
 }
 
 method labels(--> List) {
-    my $labels = CArray[int32].allocate: self.nr-class - 1;
+    my $labels = CArray[int32].allocate: self.nr-class;
     svm_get_labels(self, $labels);
     $labels.list
 }
 
 method sv-indices(--> List) {
-    my $indices = CArray[int32].allocate: self.nr-sv - 1;
+    my $indices = CArray[int32].allocate: self.nr-sv;
     svm_get_sv_indices(self, $indices);
     $indices.list
 }
