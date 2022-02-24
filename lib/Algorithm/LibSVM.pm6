@@ -114,7 +114,8 @@ Algorithm::LibSVM - A Raku bindings for libsvm
   my $libsvm = Algorithm::LibSVM.new;
   my Algorithm::LibSVM::Parameter $parameter .= new(svm-type => C_SVC,
                                                     kernel-type => RBF);
-  my Algorithm::LibSVM::Problem $problem = $libsvm.load-problem('heart_scale');
+  # heart_scale is here: https://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/binary/heart_scale
+  my Algorithm::LibSVM::Problem $problem = Algorithm::LibSVM::Problem.from-file('heart_scale');
   my @r = $libsvm.cross-validation($problem, $parameter, 10);
   $libsvm.evaluate($problem.y, @r).say; # {acc => 81.1111111111111, mse => 0.755555555555556, scc => 1.01157627463546}
 
@@ -126,38 +127,43 @@ Algorithm::LibSVM - A Raku bindings for libsvm
   use Algorithm::LibSVM::Model;
 
   sub gen-train {
-      my $max-x = 1;
-      my $min-x = -1;
-      my $max-y = 1;
-      my $min-y = -1;
+    my $max-x = 1;
+    my $min-x = -1;
+    my $max-y = 1;
+    my $min-y = -1;
+    my @tmp-x;
+    my @tmp-y;
+    do for ^300 {
+        my $x = $min-x + rand * ($max-x - $min-x);
+        my $y = $min-y + rand * ($max-y - $min-y);
 
-      do for ^300 {
-         my $x = $min-x + rand * ($max-x - $min-x);
-         my $y = $min-y + rand * ($max-y - $min-y);
-
-         my $label = do given $x, $y {
+        my $label = do given $x, $y {
             when ($x - 0.5) ** 2 + ($y - 0.5) ** 2 <= 0.2 {
-                   1
+                1
             }
             when ($x - -0.5) ** 2 + ($y - -0.5) ** 2 <= 0.2 {
-                2
+                -1
             }
             default { Nil }
-      }
-      ($label,"1:$x","2:$y") if $label.defined;
-    }.sort({ $^a.[0] cmp $^b.[0] })>>.join(" ")
+        }
+        if $label.defined {
+            @tmp-y.push: $label;
+            @tmp-x.push: [$x, $y];
+        }
+    }
+    # Note that @x must be a shaped one.
+    my @x[+@tmp-x;2] = @tmp-x.clone;
+    my @y = @tmp-y.clone;
+    (@x, @y)
   }
 
-  my Str @train = gen-train;
-
-  my Pair @test = parse-libsvmformat(q:to/END/).head<pairs>.flat;
-  1 1:0.5 2:0.5
-  END
-
+  my (@train-x, @train-y) := gen-train;
+  my @test-x = 1 => 0.5e0, 2 => 0.5e0;
+  my @text-y = [1];
   my $libsvm = Algorithm::LibSVM.new;
   my Algorithm::LibSVM::Parameter $parameter .= new(svm-type => C_SVC,
                                                     kernel-type => LINEAR);
-  my Algorithm::LibSVM::Problem $problem = $libsvm.load-problem(@train);
+  my Algorithm::LibSVM::Problem $problem = Algorithm::LibSVM::Problem.from-matrix(@train-x, @train-y);
   my $model = $libsvm.train($problem, $parameter);
   say $model.predict(features => @test)<label> # 1
 
