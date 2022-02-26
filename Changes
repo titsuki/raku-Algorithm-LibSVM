@@ -2,6 +2,13 @@ Revision history for Algorithm-LibSVM
 
 {{$NEXT}}
 
+0.0.15  2022-02-26T21:51:13+09:00
+    - Make Problem enable to have nr-feature [#58]
+    - Cast Int into Bool [#59]
+    - Allow explicit + sign when parsing label column [#61]
+    - Fix allocation size of CArray [#62]
+    - Deprecate load-problem [#60]
+
 0.0.14  2021-07-23T13:38:45+09:00
     - Make sure problem.y is feasible even if its instance was used by cross-validation [#56]
 

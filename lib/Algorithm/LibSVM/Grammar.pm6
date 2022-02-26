@@ -1,5 +1,5 @@
 use v6;
-unit grammar Algorithm::LibSVM::Grammar:ver<0.0.14>;
+unit grammar Algorithm::LibSVM::Grammar:ver<0.0.15>;
 
 token TOP { <bodylist> }
 token number { ['-'|'+']* \d+ [ \. \d+ [ 'e' '-'? \d+ ]? ]? }
