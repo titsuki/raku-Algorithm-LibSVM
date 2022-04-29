@@ -65,13 +65,12 @@ EXAMPLE 2
 
     my (@train-x, @train-y) := gen-train;
     my @test-x = 1 => 0.5e0, 2 => 0.5e0;
-    my @text-y = [1];
     my $libsvm = Algorithm::LibSVM.new;
     my Algorithm::LibSVM::Parameter $parameter .= new(svm-type => C_SVC,
                                                       kernel-type => LINEAR);
     my Algorithm::LibSVM::Problem $problem = Algorithm::LibSVM::Problem.from-matrix(@train-x, @train-y);
     my $model = $libsvm.train($problem, $parameter);
-    say $model.predict(features => @test)<label> # 1
+    say $model.predict(features => @test-x)<label> # 1
 
 DESCRIPTION
 ===========
