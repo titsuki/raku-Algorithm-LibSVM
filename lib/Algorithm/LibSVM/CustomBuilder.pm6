@@ -15,7 +15,7 @@ class Algorithm::LibSVM::CustomBuilder:ver<0.0.15> is Distribution::Builder::Mak
 
 	my constant $VERSION = "3.25";
 	if $VERSION.IO.d {
-        run 'ls';
+        shell 'ls';
         shell "which patch";
 	    shell "patch $VERSION/svm.h $VERSION/svm.h.patch -o svm.h";
 	    shell "patch $VERSION/svm.cpp $VERSION/svm.cpp.patch -o svm.cpp";

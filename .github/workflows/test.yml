@@ -27,6 +27,8 @@ jobs:
         run: which ls
       - name: which bash
         run: which bash
+      - name: which sh
+        run: which sh
       - name: Install Dependencies
         run: zef install --/test --test-depends --deps-only .
       - name: Install App::Prove6
