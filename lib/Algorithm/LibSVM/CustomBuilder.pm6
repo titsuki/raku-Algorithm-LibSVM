@@ -14,6 +14,7 @@ class Algorithm::LibSVM::CustomBuilder:ver<0.0.15> is Distribution::Builder::Mak
 	chdir($srcdir);
 
 	my constant $VERSION = "3.25";
+	run 'ls';
 	if $VERSION.IO.d {
 	$*ERR.say: %*ENV<ComSpec>;
         run 'ls';
