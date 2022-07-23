@@ -18,7 +18,8 @@ class Algorithm::LibSVM::CustomBuilder:ver<0.0.15> is Distribution::Builder::Mak
 	    #my $p = Proc::Async.new("ls");
 	    #$p.stdout.tap(-> $v { print "Output: $v" });
 	    #await $p.start;
-	    await Promise.in(0);
+	    my $p = Proc::Async.new("echo", "-n");
+	    await $p.start;
 	    shell "patch $VERSION/svm.h $VERSION/svm.h.patch -o svm.h";
 	    shell "patch $VERSION/svm.cpp $VERSION/svm.cpp.patch -o svm.cpp";
 	}
