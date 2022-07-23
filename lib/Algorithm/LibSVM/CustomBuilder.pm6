@@ -15,7 +15,7 @@ class Algorithm::LibSVM::CustomBuilder:ver<0.0.15> is Distribution::Builder::Mak
 
 	my constant $VERSION = "3.25";
 	if $VERSION.IO.d {
-	    my $p = Proc::Aync.new("ls");
+	    my $p = Proc::Async.new("ls");
 	    $p.stdout.tap(-> $v { print "Output: $v" });
 	    await $p.start;
 	    shell "patch $VERSION/svm.h $VERSION/svm.h.patch -o svm.h";
