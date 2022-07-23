@@ -23,6 +23,6 @@ class Algorithm::LibSVM::CustomBuilder:ver<0.0.15> is Distribution::Builder::Mak
 	}
 	shell(%vars<MAKE>);
 	chdir($goback);
-	Nil;
+	True
     }
 }
