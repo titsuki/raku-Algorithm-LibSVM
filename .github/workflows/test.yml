@@ -36,6 +36,6 @@ jobs:
       - name: Install App::Prove6
         run: zef install --/test App::Prove6
       - name: Build libsvm
-        run: zef build .
+        run: ZEF_BUILD_TIMEOUT=3600 && zef build .
       - name: Run Tests
         run: prove6 -l t
