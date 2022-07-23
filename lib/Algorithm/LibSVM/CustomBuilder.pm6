@@ -14,11 +14,10 @@ class Algorithm::LibSVM::CustomBuilder:ver<0.0.15> is Distribution::Builder::Mak
 	chdir($srcdir);
 
 	my constant $VERSION = "3.25";
-	run 'ls';
 	if $VERSION.IO.d {
-	$*ERR.say: %*ENV<ComSpec>;
-        run 'ls';
-        run 'which', 'patch';
+	    my $p = Proc::Aync.new("ls");
+	    $p.stdout.tap(-> $v { print "Output: $v" });
+	    await $p.start;
 	    shell "patch $VERSION/svm.h $VERSION/svm.h.patch -o svm.h";
 	    shell "patch $VERSION/svm.cpp $VERSION/svm.cpp.patch -o svm.cpp";
 	}
