@@ -6,7 +6,7 @@ use Algorithm::LibSVM::Model;
 use Algorithm::LibSVM::Grammar;
 use Algorithm::LibSVM::Actions;
 
-unit class Algorithm::LibSVM:ver<0.0.15>;
+unit class Algorithm::LibSVM:ver<0.0.16>;
 
 my constant $library = %?RESOURCES<libraries/svm>.Str;
 
