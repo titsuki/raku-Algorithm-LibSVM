@@ -2,6 +2,12 @@ Revision history for Algorithm-LibSVM
 
 {{$NEXT}}
 
+0.0.17  2022-09-03T17:34:18+09:00
+    - NOTE: I made a mistake on uploading 0.0.16. Disregard 0.0.16.
+    - Upload to zef intead of cpan
+    - Fix typo in the example [#63]
+    - Fix build issue on OSX [#67]
+
 0.0.16  2022-09-03T17:27:42+09:00
     - Upload to zef intead of cpan
 

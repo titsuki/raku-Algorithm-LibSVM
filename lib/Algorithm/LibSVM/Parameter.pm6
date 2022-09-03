@@ -1,7 +1,7 @@
 use v6;
 use NativeCall;
 
-unit class Algorithm::LibSVM::Parameter:auth<zef:titsuki>:ver<0.0.16> is export is repr('CStruct');
+unit class Algorithm::LibSVM::Parameter:auth<zef:titsuki>:ver<0.0.17> is export is repr('CStruct');
 
 my constant $library = %?RESOURCES<libraries/svm>.Str;
 

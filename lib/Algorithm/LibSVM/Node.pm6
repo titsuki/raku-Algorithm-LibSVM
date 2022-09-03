@@ -1,6 +1,6 @@
 use v6;
 
-unit class Algorithm::LibSVM::Node:auth<zef:titsuki>:ver<0.0.16> is export is repr('CStruct');
+unit class Algorithm::LibSVM::Node:auth<zef:titsuki>:ver<0.0.17> is export is repr('CStruct');
 
 has int32 $.index;
 has num64 $.value;
