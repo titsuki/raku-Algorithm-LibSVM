@@ -2,6 +2,9 @@ Revision history for Algorithm-LibSVM
 
 {{$NEXT}}
 
+0.0.16  2022-09-03T17:27:42+09:00
+    - Upload to zef intead of cpan
+
 0.0.15  2022-02-26T21:51:13+09:00
     - Make Problem enable to have nr-feature [#58]
     - Cast Int into Bool [#59]

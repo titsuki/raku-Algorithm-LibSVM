@@ -3,7 +3,7 @@ use NativeCall;
 use Algorithm::LibSVM::Node;
 use Algorithm::LibSVM::Parameter;
 
-unit class Algorithm::LibSVM::Model:ver<0.0.15> is export is repr('CPointer'); 
+unit class Algorithm::LibSVM::Model:auth<zef:titsuki>:ver<0.0.16> is export is repr('CPointer'); 
 
 my constant $library = %?RESOURCES<libraries/svm>.Str;
 

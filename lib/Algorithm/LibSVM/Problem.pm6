@@ -4,7 +4,7 @@ use Algorithm::LibSVM::Node;
 use Algorithm::LibSVM::Actions;
 use Algorithm::LibSVM::Grammar;
 
-my class Algorithm::LibSVM::CProblem:ver<0.0.14> is export is repr('CStruct') {
+my class Algorithm::LibSVM::CProblem:auth<zef:titsuki>:ver<0.0.14> is export is repr('CStruct') {
     has int32 $.l;
     has CArray[num64] $!y;
     has CArray[Algorithm::LibSVM::Node] $!x;
@@ -28,7 +28,7 @@ my class Algorithm::LibSVM::CProblem:ver<0.0.14> is export is repr('CStruct') {
     }
 }
 
-my class Algorithm::LibSVM::Problem:ver<0.0.14> is export {
+my class Algorithm::LibSVM::Problem:auth<zef:titsuki>:ver<0.0.14> is export {
     has Algorithm::LibSVM::CProblem $.as-c;
     has Int $.nr-feature;
     method BUILD(int32 :$l, CArray[num64] :$y, CArray[Algorithm::LibSVM::Node] :$x, :$!nr-feature) {
