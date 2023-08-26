@@ -1,5 +1,5 @@
 use v6;
-unit grammar Algorithm::LibSVM::Grammar:auth<zef:titsuki>:ver<0.0.17>;
+unit grammar Algorithm::LibSVM::Grammar:auth<zef:titsuki>:ver<0.0.18>;
 
 token TOP { <bodylist> }
 token number { ['-'|'+']* \d+ [ \. \d+ [ 'e' '-'? \d+ ]? ]? }

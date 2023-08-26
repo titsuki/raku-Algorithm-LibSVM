@@ -2,6 +2,10 @@ Revision history for Algorithm-LibSVM
 
 {{$NEXT}}
 
+0.0.18  2023-08-26T21:41:15+09:00
+    - Make from-matrix, from-kernel-matrix enable to infer the shape of given @x [#69]
+    - Update POD; Now, shaped @x isn't required [#70]
+
 0.0.17  2022-09-03T17:34:18+09:00
     - NOTE: I made a mistake on uploading 0.0.16. Disregard 0.0.16.
     - Upload to zef intead of cpan

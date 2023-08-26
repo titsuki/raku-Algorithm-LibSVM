@@ -1,5 +1,5 @@
 use v6;
-unit class Algorithm::LibSVM::Actions:auth<zef:titsuki>:ver<0.0.17>;
+unit class Algorithm::LibSVM::Actions:auth<zef:titsuki>:ver<0.0.18>;
 
 method TOP($/) { make $<bodylist>.made }
 method bodylist($/) { make $<body>>>.made }
