@@ -50,7 +50,12 @@ my class Algorithm::LibSVM::Problem:auth<zef:titsuki>:ver<0.0.14> is export {
         self!_load-problem($filename.IO.lines)
     }
 
-    method from-matrix(::?CLASS:U: @x where { $_.shape ~~ ($,$) }, @y --> Algorithm::LibSVM::Problem) {
+    multi method from-matrix(::?CLASS:U: @x, @y --> Algorithm::LibSVM::Problem) {
+        my @shaped-x[+@x;@x[0].elems] = @x.clone;
+        ::?CLASS.from-matrix(@shaped-x, @y)
+    }
+
+    multi method from-matrix(::?CLASS:U: @x where { $_.shape ~~ ($,$) }, @y --> Algorithm::LibSVM::Problem) is default {
         my ($nr, $nc) = @x.shape;
         my $nr-feature = 0;
         my $prob-y = CArray[num64].new;
@@ -70,7 +75,12 @@ my class Algorithm::LibSVM::Problem:auth<zef:titsuki>:ver<0.0.14> is export {
         Algorithm::LibSVM::Problem.new(l => $y-idx, y => $prob-y, x => $prob-x, :$nr-feature);
     }
 
-    method from-kernel-matrix(::?CLASS:U: @x where { $_.shape ~~ ($,$) }, @y --> Algorithm::LibSVM::Problem) {
+    multi method from-kernel-matrix(::?CLASS:U: @x, @y --> Algorithm::LibSVM::Problem) {
+        my @shaped-x[+@x;@x[0].elems] = @x.clone;
+        ::?CLASS.from-matrix(@shaped-x, @y)
+    }
+
+    multi method from-kernel-matrix(::?CLASS:U: @x where { $_.shape ~~ ($,$) }, @y --> Algorithm::LibSVM::Problem) is default {
         my ($nr, $nc) = @x.shape;
         my $nr-feature = 0;
         my $prob-y = CArray[num64].new;

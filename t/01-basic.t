@@ -32,6 +32,20 @@ use Algorithm::LibSVM::Model;
 
 {
     lives-ok {
+        my @y = [1 xx 100, 0 xx 100]>>.List.flat;
+        # y:    0       0       1
+        # x: [1 0 1] [1 0 1] [1 1 1]
+        my @x = gather for ^@y { if $_ == 1 { take [1, 1, 1] } else { take [1, 0, 1] } };
+        my $libsvm = Algorithm::LibSVM.new;
+        my $problem = Algorithm::LibSVM::Problem.from-matrix(@x, @y);
+        my Algorithm::LibSVM::Parameter $parameter .= new(svm-type => C_SVC, kernel-type => RBF);
+        my @r = $libsvm.cross-validation($problem, $parameter, 10);
+        $libsvm.evaluate($problem.y, @r);
+    }, "Algorithm::LibSVM::Problem.from-matrix should create an instance from an unshaped @x and an 1d @y.";
+}
+
+{
+    lives-ok {
         my @lines = (("1 1:0" xx 100), ("0 1:1" xx 100)).flat;
         my $libsvm = Algorithm::LibSVM.new;
         my $problem = $libsvm.load-problem(@lines);
