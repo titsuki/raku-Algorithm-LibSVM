@@ -131,8 +131,8 @@ Algorithm::LibSVM - A Raku bindings for libsvm
     my $min-x = -1;
     my $max-y = 1;
     my $min-y = -1;
-    my @tmp-x;
-    my @tmp-y;
+    my @x;
+    my @y;
     do for ^300 {
         my $x = $min-x + rand * ($max-x - $min-x);
         my $y = $min-y + rand * ($max-y - $min-y);
@@ -147,13 +147,10 @@ Algorithm::LibSVM - A Raku bindings for libsvm
             default { Nil }
         }
         if $label.defined {
-            @tmp-y.push: $label;
-            @tmp-x.push: [$x, $y];
+            @y.push: $label;
+            @x.push: [$x, $y];
         }
     }
-    # Note that @x must be a shaped one.
-    my @x[+@tmp-x;2] = @tmp-x.clone;
-    my @y = @tmp-y.clone;
     (@x, @y)
   }
 
