@@ -2,6 +2,9 @@ Revision history for Algorithm-LibSVM
 
 {{$NEXT}}
 
+0.0.20  2026-08-30T16:28:28+09:00
+    - Use libsvm 3.37 (Release 0.0.19 was failed)
+
 0.0.19  2026-08-30T16:00:26+09:00
     - Use libsvm 3.37
 
