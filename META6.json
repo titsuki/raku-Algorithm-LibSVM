@@ -28,10 +28,10 @@
   "resources": [
     "libraries/svm"
   ],
-  "source-url": "git://github.com/titsuki/raku-Algorithm-LibSVM.git",
+  "source-url": "https://github.com/titsuki/raku-Algorithm-LibSVM.git",
   "tags": [
   ],
   "test-depends": [
   ],
-  "version": "0.0.18"
+  "version": "0.0.19"
 }

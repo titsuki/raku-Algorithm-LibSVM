@@ -6,7 +6,7 @@ use Algorithm::LibSVM::Model;
 use Algorithm::LibSVM::Grammar;
 use Algorithm::LibSVM::Actions;
 
-unit class Algorithm::LibSVM:auth<zef:titsuki>:ver<0.0.18>;
+unit class Algorithm::LibSVM:auth<zef:titsuki>:ver<0.0.19>;
 
 my constant $library = %?RESOURCES<libraries/svm>.Str;
 
