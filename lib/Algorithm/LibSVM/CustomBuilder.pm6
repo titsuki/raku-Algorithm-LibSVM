@@ -13,7 +13,7 @@ class Algorithm::LibSVM::CustomBuilder:auth<zef:titsuki>:ver<0.0.19> is Distribu
 	my $goback = $*CWD;
 	chdir($srcdir);
 
-	my constant $VERSION = "3.25";
+	my constant $VERSION = "3.37";
 	if $VERSION.IO.d {
 	    # Workaround for build issue on OSX
 	    my $p = Proc::Async.new("echo", "-n");

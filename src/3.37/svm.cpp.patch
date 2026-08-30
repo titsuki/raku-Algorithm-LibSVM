@@ -1,0 +1,115 @@
+--- ../svm.cpp
++++ svm.cpp
+@@ -250,7 +250,10 @@
+ 	}
+ 	double kernel_precomputed(int i, int j) const
+ 	{
+-		return x[i][(int)(x[j][0].value)].value;
++		const struct svm_node *ptr;
++		int counter = (int)x[j]->value;
++		ptr = x[i]; while (counter-- > 0) ptr = ptr->next;
++		return ptr->value;
+ 	}
+ };
+ 
+@@ -303,15 +306,15 @@
+ 		if(px->index == py->index)
+ 		{
+ 			sum += px->value * py->value;
+-			++px;
+-			++py;
++			px = px->next;
++			py = py->next;
+ 		}
+ 		else
+ 		{
+ 			if(px->index > py->index)
+-				++py;
++				py = py->next;
+ 			else
+-				++px;
++				px = px->next;
+ 		}
+ 	}
+ 	return sum;
+@@ -335,20 +338,20 @@
+ 				{
+ 					double d = x->value - y->value;
+ 					sum += d*d;
+-					++x;
+-					++y;
++					x = x->next;
++					y = y->next;
+ 				}
+ 				else
+ 				{
+ 					if(x->index > y->index)
+ 					{
+ 						sum += y->value * y->value;
+-						++y;
++						y = y->next;
+ 					}
+ 					else
+ 					{
+ 						sum += x->value * x->value;
+-						++x;
++						x = x->next;
+ 					}
+ 				}
+ 			}
+@@ -356,13 +359,13 @@
+ 			while(x->index != -1)
+ 			{
+ 				sum += x->value * x->value;
+-				++x;
++				x = x->next;
+ 			}
+ 
+ 			while(y->index != -1)
+ 			{
+ 				sum += y->value * y->value;
+-				++y;
++				y = y->next;
+ 			}
+ 
+ 			return exp(-param.gamma*sum);
+@@ -370,7 +373,11 @@
+ 		case SIGMOID:
+ 			return tanh(param.gamma*dot(x,y)+param.coef0);
+ 		case PRECOMPUTED:  //x: test (validation), y: SV
+-			return x[(int)(y->value)].value;
++			{
++			int counter = (int)(y->value);
++			while (counter-- > 0) x = x->next;
++			return x->value;
++		}
+ 		default:
+ 			return 0;  // Unreachable
+ 	}
+@@ -2850,7 +2857,7 @@
+ 			while(p->index != -1)
+ 			{
+ 				fprintf(fp,"%d:%.8g ",p->index,p->value);
+-				p++;
++				p = p->next;
+ 			}
+ 		fprintf(fp, "\n");
+ 	}
+@@ -3104,7 +3111,7 @@
+ 				break;
+ 			x_space[j].index = (int) strtol(idx,&endptr,10);
+ 			x_space[j].value = strtod(val,&endptr);
+-
++			x_space[j].next = &x_space[j + 1];
+ 			++j;
+ 		}
+ 		x_space[j++].index = -1;
+@@ -3310,3 +3317,8 @@
+ 	else
+ 		svm_print_string = print_func;
+ }
++
++void svm_set_srand(int seed)
++{
++	srand(seed);
++}
